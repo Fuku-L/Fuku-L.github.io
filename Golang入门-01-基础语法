@@ -1,0 +1,518 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fishes.png">
+  <link rel="icon" href="/img/fishes.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Fuku Lee">
+  <meta name="keywords" content="">
+  
+  <title>Golang入门-01-基础语法 - Fuku</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/diy/shubiao.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>F's Log</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20210427005926.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Golang入门-01-基础语法">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-08-03 22:04" pubdate>
+        2021年8月3日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      909 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      11
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Golang入门-01-基础语法</h1>
+            
+            <div class="markdown-body">
+              <h1 id="学习内容"><a href="#学习内容" class="headerlink" title="学习内容"></a>学习内容</h1><ol>
+<li>go语言语法</li>
+<li>微服务项目（使用go语言实现的web框架、redis、mysql、fastdfs）</li>
+</ol>
+<h2 id="go语言本身"><a href="#go语言本身" class="headerlink" title="go语言本身"></a>go语言本身</h2><ol>
+<li>go语言出生: 2008年左右，由Google公司开发，成员都是c语言的大佬。</li>
+<li>开发速度快，执行效率搞：<ol>
+<li>开发速度 ：c &lt; go &lt; python</li>
+<li>效率：python &lt; go &lt; c</li>
+</ol>
+</li>
+<li>使用go语言开发的项目有：docker、k8s、区块链项目（以太坊、fabric）、七牛云、滴滴</li>
+<li>公司开发新项目、旧项目重构：<strong>后台服务器、web服务器</strong> 都可以使用go语言</li>
+</ol>
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1><h1 id="go语言-vs-c语言"><a href="#go语言-vs-c语言" class="headerlink" title="go语言 vs c语言"></a>go语言 vs c语言</h1><p>go语言和c语言在语法上的区别可以参考此<a target="_blank" rel="noopener" href="https://hyperpolyglot.org/c">链接</a></p>
+<h1 id="一、Go语言概述"><a href="#一、Go语言概述" class="headerlink" title="一、Go语言概述"></a>一、Go语言概述</h1><h2 id="1-工程管理"><a href="#1-工程管理" class="headerlink" title="1. 工程管理"></a>1. 工程管理</h2><h3 id="GOPATH："><a href="#GOPATH：" class="headerlink" title="- GOPATH："></a>- GOPATH：</h3><h4 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h4><p><em>gopath是所有项目的根路径</em></p>
+<p>go语言项目有特定的目录结构进行管理，一个标准的go工程使用GOPATH环境变量来指定，并且需要三个目录结构：</p>
+<ul>
+<li>src<ul>
+<li>存放项目源代码</li>
+</ul>
+</li>
+<li>bin<ul>
+<li>使用 go install 命令后生成文件存放的路径，即存放编译后的程序（.exe等可执行二进制文件）</li>
+</ul>
+</li>
+<li>pkg<ul>
+<li>缓存包</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-配置"><a href="#2-配置" class="headerlink" title="2. 配置"></a>2. 配置</h4><ol>
+<li><p>创建项目文件结构</p>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20210803225500.png" srcset="/img/loading.gif" lazyload alt="image-20210803225458547"></p>
+</li>
+<li><p>编辑系统环境变量</p>
+</li>
+</ol>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20210803225342.png" srcset="/img/loading.gif" lazyload alt="image-20210803225340280"></p>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20210803225542.png" srcset="/img/loading.gif" lazyload alt="image-20210803225541196"></p>
+<h3 id="GOROOT"><a href="#GOROOT" class="headerlink" title="-  GOROOT"></a>-  GOROOT</h3><ol>
+<li><p>概念</p>
+<p>存放 go 语言标准库 sdk： software development kit 的</p>
+</li>
+<li><p>下载安装</p>
+<p><a target="_blank" rel="noopener" href="https://golang.google.cn/dl/">go标准库下载地址</a></p>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20210803225938.png" srcset="/img/loading.gif" lazyload alt="image-20210803225936654"></p>
+<p>下载安装完成后，配置系统环境变量</p>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20210803230221.png" srcset="/img/loading.gif" lazyload alt="安装完成"></p>
+<p>配置系统变量<br><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20210803230338.png" srcset="/img/loading.gif" lazyload alt="image-20210803230337444"></p>
+</li>
+</ol>
+<h3 id="使用GoLand工具"><a href="#使用GoLand工具" class="headerlink" title="使用GoLand工具"></a>使用GoLand工具</h3><ol>
+<li>使用 GoLand 工具打开项目</li>
+</ol>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20210803231046.png" srcset="/img/loading.gif" lazyload alt="image-20210803231045045"></p>
+<ol start="2">
+<li>配置 settings 中的 GOROOT 和 GOPATH</li>
+</ol>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20210803231920.png" srcset="/img/loading.gif" lazyload alt="image-20210803231919957"></p>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20210803231901.png" srcset="/img/loading.gif" lazyload alt="image-20210803231900401"></p>
+<h2 id="2-HelloWorld概述"><a href="#2-HelloWorld概述" class="headerlink" title="2. HelloWorld概述"></a>2. HelloWorld概述</h2><figure class="highlight go"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><span class="hljs-comment">// 每个go程序，都必须有一个 package main</span><br><span class="hljs-comment">// 每个go程序，都是以 .go 结尾， go程序中没有 .h 没有 .o 只有 .go</span><br><span class="hljs-comment">// 一个 &quot;package 包名&quot; 相当于命名空间 std::cout</span><br><br><span class="hljs-keyword">import</span> (<br>	<span class="hljs-string">&quot;fmt&quot;</span><br>	<span class="hljs-string">&quot;time&quot;</span><br>)<br><span class="hljs-comment">// 导入一个标准包 fmt，format 用于格式化输出</span><br><br><span class="hljs-comment">// 主函数，所有的函数必须使用 func 开头</span><br><span class="hljs-comment">// 一个函数的返回值，不会放在 func 前面，而是放在参数列表后面</span><br><span class="hljs-comment">// 函数的左花括号必须与函数名同行，不能写到下一行</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-comment">// go语言语句不需要使用分号结尾</span><br>	fmt.Println(<span class="hljs-string">&quot;say&quot;</span>);<br>	fmt.Println(<span class="hljs-string">&quot;hello world&quot;</span>)<br>	now := time.Now()<br>	fmt.Println(now)<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="3-go语言特点"><a href="#3-go语言特点" class="headerlink" title="3. go语言特点"></a>3. go语言特点</h2><h2 id="4-goland终端配置成shell"><a href="#4-goland终端配置成shell" class="headerlink" title="4. goland终端配置成shell"></a>4. goland终端配置成shell</h2><h2 id="5-go命令"><a href="#5-go命令" class="headerlink" title="5. go命令"></a>5. go命令</h2><h1 id="二、基础语法"><a href="#二、基础语法" class="headerlink" title="二、基础语法"></a>二、基础语法</h1><h2 id="1-变量定义"><a href="#1-变量定义" class="headerlink" title="1. 变量定义"></a>1. 变量定义</h2><figure class="highlight go"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-comment">// idea会自动导入程序中使用的包</span><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br><br>	<span class="hljs-comment">// 变量定义： var</span><br>	<span class="hljs-comment">// 常量定义： const</span><br><br>	<span class="hljs-comment">// 01-先定义变量在赋值，</span><br>	<span class="hljs-comment">// 格式: var 变量名 数据类型</span><br>	<span class="hljs-keyword">var</span> name <span class="hljs-keyword">string</span><br>	name = <span class="hljs-string">&quot;fuku&quot;</span> <span class="hljs-comment">//Ctrl + Alt +l 可以快速格式化代码</span><br><br>	<span class="hljs-keyword">var</span> age <span class="hljs-keyword">int</span><br>	age = <span class="hljs-number">22</span><br><br>	fmt.Println(<span class="hljs-string">&quot;name:&quot;</span>, name)<br>	fmt.Printf(<span class="hljs-string">&quot;name: %s, age: %d \n&quot;</span>, name, age)<br><br>	<span class="hljs-comment">// 02-定义时候直接赋值</span><br>	<span class="hljs-keyword">var</span> gender = <span class="hljs-string">&quot;man&quot;</span><br>	fmt.Println(<span class="hljs-string">&quot;gender:&quot;</span>, gender)<br><br>	<span class="hljs-comment">// 03-使用&quot;:=&quot;直接推导</span><br>	address := <span class="hljs-string">&quot;北京&quot;</span><br>	fmt.Println(<span class="hljs-string">&quot;address:&quot;</span>, address)<br><br>	<span class="hljs-comment">// 平行赋值</span><br>	i, j := <span class="hljs-number">10</span>, <span class="hljs-number">20</span><br>	fmt.Println(<span class="hljs-string">&quot;变换前 ==》 i:&quot;</span>, i, <span class="hljs-string">&quot;,j:&quot;</span>, j)<br><br>	i, j = j, i<br>	fmt.Println(<span class="hljs-string">&quot;变换后 ==》 i:&quot;</span>, i, <span class="hljs-string">&quot;,j:&quot;</span>, j)<br><br>	<span class="hljs-comment">// 测试函数</span><br>	test(i,<span class="hljs-string">&quot;str&quot;</span>)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">test</span><span class="hljs-params">(a <span class="hljs-keyword">int</span>, b <span class="hljs-keyword">string</span>)</span></span>&#123;<br>	fmt.Println(a)<br>	fmt.Println(b)<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20210804003839.png" srcset="/img/loading.gif" lazyload alt="image-20210804003837935"></p>
+<h2 id="2-自增语法"><a href="#2-自增语法" class="headerlink" title="2. 自增语法"></a>2. 自增语法</h2><p> c语言：i++,i–,–i,++i<br> go语言：① i++,i–没有 –i 和 ++i<br>        ② 自增语法必须单独一行</p>
+<figure class="highlight go"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	i:=<span class="hljs-number">20</span><br>	i++<br>	<span class="hljs-comment">// 错误使用</span><br>	<span class="hljs-comment">// ++i 为了使语义更加明确，go语法不允许使用 ++i</span><br>	<span class="hljs-comment">//fmt.Println(&quot;i:&quot;,i++) 这种也是错误的，不允许和其他代码放在一起，必须单独一行</span><br>	fmt.Println(<span class="hljs-string">&quot;i:&quot;</span>,i)<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+<h2 id="3-指针"><a href="#3-指针" class="headerlink" title="3. 指针"></a>3. 指针</h2><h2 id="4-不支持的语法汇总"><a href="#4-不支持的语法汇总" class="headerlink" title="4. 不支持的语法汇总"></a>4. 不支持的语法汇总</h2><h2 id="5-字符串string"><a href="#5-字符串string" class="headerlink" title="5. 字符串string"></a>5. 字符串string</h2><h2 id="6-定长数组"><a href="#6-定长数组" class="headerlink" title="6. 定长数组"></a>6. 定长数组</h2><h2 id="7-不定长数组（切片、slice）"><a href="#7-不定长数组（切片、slice）" class="headerlink" title="7. 不定长数组（切片、slice）"></a>7. 不定长数组（切片、slice）</h2><h2 id="8-字典-（map）"><a href="#8-字典-（map）" class="headerlink" title="8. 字典 （map）"></a>8. 字典 （map）</h2><h2 id="9-函数"><a href="#9-函数" class="headerlink" title="9. 函数"></a>9. 函数</h2><h2 id="10-import"><a href="#10-import" class="headerlink" title="10. import"></a>10. import</h2>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Go/">Go</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/GoTrip%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">GoTrip项目部署</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/GRPC-01-Protobuf%E8%AF%AD%E8%A8%80%E6%8C%87%E5%8D%97">
+                        <span class="hidden-mobile">GRPC-01-Protobuf语言指南</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="/js/diy/caidai.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

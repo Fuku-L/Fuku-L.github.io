@@ -1,0 +1,533 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fishes.png">
+  <link rel="icon" href="/img/fishes.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Fuku Lee">
+  <meta name="keywords" content="">
+  
+  <title>Docker-Study-02-安装 - Fuku</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/diy/shubiao.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>F's Log</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20210427005926.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Docker-Study-02-安装">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-07-03 00:39" pubdate>
+        2021年7月3日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      18
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Docker-Study-02-安装</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h1><h2 id="1-Docker的基本组成"><a href="#1-Docker的基本组成" class="headerlink" title="1. Docker的基本组成"></a>1. Docker的基本组成</h2><p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20210703013958.png" srcset="/img/loading.gif" lazyload alt="image-20210703004251732"></p>
+<ul>
+<li><p><strong>镜像（image)</strong></p>
+<p>docker镜像就像一个执行列表，通过这个列表来创建容器服务，tomcat镜像==》run==》容器（提供服务），通过一个镜像可以创建多个容器（最终服务或者项目运行就是在容器之中的）</p>
+</li>
+<li><p><strong>容器（container）</strong></p>
+<p>通过镜像创建的，独立运行一个或者一组应用。</p>
+<p>包含<strong>启动</strong>，<strong>停止</strong>，<strong>删除</strong>、<strong>查看日志</strong>等基本命令</p>
+<p>每一个容器都是包括简易的Linux系统终端</p>
+</li>
+<li><p><strong>仓库（repository）</strong></p>
+<p>仓库是存放镜像的地方</p>
+<p>分为<strong>公有</strong>仓库和<strong>私有</strong>仓库</p>
+<p>DockerHub是国外地址</p>
+<p>阿里云…等都有容器服务器(通过配置镜像加速即可)</p>
+</li>
+</ul>
+<h2 id="2-Docker安装步骤"><a href="#2-Docker安装步骤" class="headerlink" title="2.Docker安装步骤"></a>2.Docker安装步骤</h2><ul>
+<li><p>环境准备</p>
+<p>Linux要求内核(knel)在3.0以上</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">~ uname -r<br>3.10.0-957.21.3.el7.x86_64 # 内核要求 3.0 以上<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">~ cat /etc/os-release <br>NAME=&quot;CentOS Linux&quot;<br>VERSION=&quot;7 (Core)&quot;<br>ID=&quot;centos&quot;<br>ID_LIKE=&quot;rhel fedora&quot;<br>VERSION_ID=&quot;7&quot;<br>PRETTY_NAME=&quot;CentOS Linux 7 (Core)&quot;<br>ANSI_COLOR=&quot;0;31&quot;<br>CPE_NAME=&quot;cpe:/o:centos:centos:7&quot;<br>HOME_URL=&quot;https://www.centos.org/&quot;<br>BUG_REPORT_URL=&quot;https://bugs.centos.org/&quot;<br><br>CENTOS_MANTISBT_PROJECT=&quot;CentOS-7&quot;<br>CENTOS_MANTISBT_PROJECT_VERSION=&quot;7&quot;<br>REDHAT_SUPPORT_PRODUCT=&quot;centos&quot;<br>REDHAT_SUPPORT_PRODUCT_VERSION=&quot;7&quot;<br></code></pre></div></td></tr></table></figure></li>
+<li><p>安装</p>
+<blockquote>
+<p>帮助文档: <a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/">https://docs.docker.com/engine/install/</a></p>
+</blockquote>
+</li>
+</ul>
+<ol>
+<li><p>卸载旧版本</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">yum remove docker \<br>                  docker-client \<br>                  docker-client-latest \<br>                  docker-common \<br>                  docker-latest \<br>                  docker-latest-logrotate \<br>                  docker-logrotate \<br>                  docker-engine<br></code></pre></div></td></tr></table></figure></li>
+<li><p>需要的安装包</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">yum install -y yum-utils<br></code></pre></div></td></tr></table></figure></li>
+<li><p>设置镜像的仓库</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">配置国内阿里云的镜像地址</span><br>yum-config-manager \<br>    --add-repo \<br>    http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo<br><span class="hljs-meta">#</span><span class="bash"> 官网配置地址是国外的,不推荐</span><br>yum-config-manager \<br>    --add-repo \<br>    https://download.docker.com/linux/centos/docker-ce.repo<br></code></pre></div></td></tr></table></figure></li>
+<li><p>安装docker相关的服务 docker-ce 社区版 -ee 企业版</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">yum install docker-ce docker-ce-cli containerd.io<br><span class="hljs-meta">#</span><span class="bash"> docker-ce docker服务器</span><br><span class="hljs-meta">#</span><span class="bash"> docker-ce-cli docker客户端</span><br><span class="hljs-meta">#</span><span class="bash"> contianerd.io 容器</span><br></code></pre></div></td></tr></table></figure></li>
+<li><p>使用 docker version 查看是否安装成功</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">~ docker version<br>Client: Docker Engine - Community<br> Version:           20.10.7<br> API version:       1.41<br> Go version:        go1.13.15<br> Git commit:        f0df350<br> Built:             Wed Jun  2 11:58:10 2021<br> OS/Arch:           linux/amd64<br> Context:           default<br> Experimental:      true<br>Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?<br><span class="hljs-meta">#</span><span class="bash"> 安装成功</span><br></code></pre></div></td></tr></table></figure></li>
+<li><p>启动 docker 并测试</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">systemctl start docker<br><span class="hljs-meta">#</span><span class="bash"> 运行 docker run hello-world 测试docker是否启动成功</span><br>docker run hello-world<br>Unable to find image &#x27;hello-world:latest&#x27; locally # 未在本地找到镜像<br>latest: Pulling from library/hello-world # 从镜像仓库中拉取最新镜像<br>b8dfde127a29: Pull complete # 下载完成<br>Digest: sha256:9f6ad537c5132bcce57f7a0a20e317228d382c3cd61edae14650eec68b2b345c # 签名<br>Status: Downloaded newer image for hello-world:latest<br><span class="hljs-meta">#</span><span class="bash"> 运行容器</span><br>Hello from Docker!<br>This message shows that your installation appears to be working correctly.<br><br>To generate this message, Docker took the following steps:<br> 1. The Docker client contacted the Docker daemon.<br> 2. The Docker daemon pulled the &quot;hello-world&quot; image from the Docker Hub.<br>    (amd64)<br> 3. The Docker daemon created a new container from that image which runs the<br>    executable that produces the output you are currently reading.<br> 4. The Docker daemon streamed that output to the Docker client, which sent it<br>    to your terminal.<br><br>To try something more ambitious, you can run an Ubuntu container with:<br><span class="hljs-meta"> $</span><span class="bash"> docker run -it ubuntu bash</span><br><br>Share images, automate workflows, and more with a free Docker ID:<br> https://hub.docker.com/<br><br>For more examples and ideas, visit:<br> https://docs.docker.com/get-started/<br></code></pre></div></td></tr></table></figure></li>
+<li><p>查看下载的镜像</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">docker images<br>REPOSITORY    TAG       IMAGE ID       CREATED        SIZE<br>hello-world   latest    d1165f221234   3 months ago   13.3kB<br><span class="hljs-meta">#</span><span class="bash"> SIZE 才 KB 级别</span><br></code></pre></div></td></tr></table></figure></li>
+<li><p>卸载docker(了解即可)</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 1. 卸载依赖</span><br>yum remove docker-ce docker-ce-cli containerd.io<br><span class="hljs-meta">#</span><span class="bash"> 2. 删除资源</span><br>rm -rf /var/lib/docker<br>rm -rf /var/lib/containerd<br></code></pre></div></td></tr></table></figure></li>
+<li><p>配置阿里云镜像加速</p>
+<ul>
+<li><p>登录阿里云找到容器服务</p>
+</li>
+<li><p>找到镜像加速器，在服务器执行命令即可</p>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20210703014003.png" srcset="/img/loading.gif" lazyload alt="image-20210703013628470"></p>
+</li>
+<li><p>run hello-world 执行流程</p>
+</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20210703181136.png" srcset="/img/loading.gif" lazyload alt="image-20210703181134596"></p>
+<h2 id="3-底层原理"><a href="#3-底层原理" class="headerlink" title="3.底层原理"></a>3.底层原理</h2><ul>
+<li><p><strong>Docker是怎么工作的？</strong></p>
+<blockquote>
+<p>Docker是一个Client-Server结构的系统，Docker的守护进程（Docker daemon组件服务）运行在宿主机上，我们一般使用客户端通过Socket访问服务。</p>
+</blockquote>
+<p><strong>Docker-Client</strong>：就是Docker提供命令行界面工具，是用户与Docker进行交互的主要方式。客户端可以构建，运行和停止Docker应用，还可以远程与Docker_Host进行交互。</p>
+<p><strong>Docker Daemon</strong>：包括三个部分：Docker Server、Engine、Job。Docker Daemon运行在Docker host上，负责创建、运行、监控容器，构建、存储镜像。Docker Daemon可以认为是通过Docker Server模块接受Docker Client的请求，并在Engine中处理请求，创建出置顶的Job并运行。</p>
+<p><strong>Docker-Server</strong>：接收到Docker-Client的指令，就会执行这个命令！</p>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20210706222738.png" srcset="/img/loading.gif" lazyload alt="image-20210706222736869"></p>
+</li>
+<li><p><strong>为什么Docker比VM快</strong></p>
+<ol>
+<li><p>docker有着比虚拟机更少的抽象层。由于 docker 不需要 Hypervisor 实现硬件资源虚拟化，运行在 docker 容器上的程序直接使用的是实际物理机的硬件资源。因此在CPU、内存利用率上、在运行效率上 docker 有明显的优势。</p>
+</li>
+<li><p>docker 利用的是宿主机的内核，不需要 Guest OS。</p>
+<p>Guest OS： VM中的系统（OS）</p>
+<p>HostOS：物理机里的系统（OS）</p>
+</li>
+</ol>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20210706223133.png" srcset="/img/loading.gif" lazyload alt="image-20210706223133"></p>
+<p>每次启动一个虚拟机时，虚拟机软件都需要先加载GuestOS系统，进行一系列的系统引导和开机检查，而docker直接利用宿主机的操作系统，省略了这个复杂的过程。即在创建一个容器时，docker不需要像虚拟机一样重新加载一个操作系统的内核，从而避免了引导、加载操作系统内核等费时费资源的过程。因此新建一个docker容器只需要几秒钟的时间。</p>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Docker/">Docker</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Study/">Study</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/Docker-Study-04-Docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Docker-Study-04-Docker常用命令</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Docker-Study-02-%E6%A6%82%E8%BF%B0">
+                        <span class="hidden-mobile">Docker-Study-02-概述</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="/js/diy/caidai.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
