@@ -1,0 +1,502 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fishes.png">
+  <link rel="icon" href="/img/fishes.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Fuku Lee">
+  <meta name="keywords" content="">
+  
+  <title>Fuku</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/diy/shubiao.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>F's Log</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20210427005926.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-10-12 11:28" pubdate>
+        2022年10月12日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      976 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      10
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            <div class="markdown-body">
+              <h1 id="数据库表空间回收"><a href="#数据库表空间回收" class="headerlink" title="数据库表空间回收"></a>数据库表空间回收</h1><blockquote>
+<p>为什么简单地删除表数据无法达到表空间回收的效果？  </p>
+</blockquote>
+<ul>
+<li>一个 InnoDB 表包含两个部分：表结构定义和数据。</li>
+<li>参数 innodb_file_per_table: 控制表数据存放在共享表空间，还是单独的文件。从 MySQL 5.6.6 开始，该参数为 ON，即每个表数据单独存放。<ul>
+<li>innodb_file_per_table = OFF 时，表数据存放在系统表空间中，和数据字典存在一起</li>
+<li>innodb_file_per_table = ON 时，每个 InnoDB 表数据单独存放在以 .ibd 结尾的文件中。<br>将 innodb_file_per_table 设置为 ON，然后通过 drop table 命令删除整张表数据的话，就可以回收表空间。但是大多数情况下都是删除某些数据行，而不是删除整站数据表。</li>
+</ul>
+</li>
+</ul>
+<h1 id="InnoDB-中的数据删除"><a href="#InnoDB-中的数据删除" class="headerlink" title="InnoDB 中的数据删除"></a>InnoDB 中的数据删除</h1><ol>
+<li>删除的是某行数据：该行被标记删除，该行的位置可以留给之后限定范围的数据行申请使用。（数据页中存在数据碎片）</li>
+<li>删除的是整页数据（即删除的是一整个叶子节点的数据）：整个数据页被标记删除，整页位置留给该表之后新的叶子节点申请使用。</li>
+</ol>
+<ul>
+<li>共同点：删除只是标记删除，表示该行位置 or 该数据页“可复用”。不能回收表空间。</li>
+<li>区别：数据页的复用跟记录的复用不同。数据页可以随机复用，记录只能是特定数据行才能复用。</li>
+</ul>
+<p>引起数据碎片的操作有：delete、insert、update。</p>
+<ul>
+<li>Insert 操作可能会造成数据页的分裂。这样就多张数据页上就存在数据碎片，空间利用率很低。因此，主键的最好选择业务无关的自增长序列。来维持数据库的空间的有效利用。</li>
+<li>Update 操作可以理解为：删除一个旧的值，再插入一个新值。这样也会造成数据碎片。<br>因此，经过大量增删改操作的表，都可能是存在空洞的。可以通过“重建表”，来将这些空洞去掉，以达到收缩表空间的目的。</li>
+</ul>
+<h1 id="MySQL-的三种重建表"><a href="#MySQL-的三种重建表" class="headerlink" title="MySQL 的三种重建表"></a>MySQL 的三种重建表</h1><ol>
+<li><code>alter table A engine=InnoDB;</code>： MySQL 5.6 之后，该过程是 Online 且 inplace 的。（后面会解释）</li>
+<li><code>analyze table A;</code> ：只是对表的索引信息做重新统计，没有修改数据，过程中加了 MDL 读锁。</li>
+<li><code>optimize table A;</code>：等于 alter + analyze 前面两个命令的组合。</li>
+</ol>
+<h2 id="alter-talbe-A-engine-InnoDB-流程"><a href="#alter-talbe-A-engine-InnoDB-流程" class="headerlink" title="alter talbe A engine=InnoDB; 流程"></a><code>alter talbe A engine=InnoDB;</code> 流程</h2><p>InnoDB 重建表流程：</p>
+<ol>
+<li>建立临时文件 tmp，扫描表 A 主键的所有数据页</li>
+<li>用数据页中表 A 的记录生成 B+ 树，存储到临时文件中</li>
+<li>生成临时文件的过程中，将所有对表 A 的操作记录在一个日志文件（row_log）中</li>
+<li>临时文件生成后，将 row_log 应用到临时文件中，得到一个逻辑数据上和表 A 相同的数据文件。（Online）</li>
+<li>用临时文件替换表 A 的数据文件。</li>
+</ol>
+<blockquote>
+<p>MySQL 5.6 之前，没有 row_log，因此在重建表过程中，不能有更新操作。即该操作是非 Online 的。5.6 版本只会，对重建表操作做了优化。通过 row_log 实现了 Online DDL。</p>
+</blockquote>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20220228003518.png" srcset="/img/loading.gif" lazyload alt="图1 MySQL 5.6之前的重建表流程"></p>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20220228003612.png" srcset="/img/loading.gif" lazyload alt="图2 MySQL 5.6之后的重建表流程"></p>
+<h2 id="Online-和-inpalce"><a href="#Online-和-inpalce" class="headerlink" title="Online 和 inpalce"></a>Online 和 inpalce</h2><ol>
+<li>从图1中可以看出，tmp_table 是serve层创建的，因此对数据库来说看得到表复制，因此是非 inplace。</li>
+<li>从图2中可以看出，tmp_file 是InnoDB引擎创建的，对于 MySQL server层不可见，因此是 inplace的。</li>
+</ol>
+<blockquote>
+<p>代码上：<br>强制拷贝表，对应图1执行流程。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> A engine<span class="hljs-operator">=</span>innodb,ALGORITHM<span class="hljs-operator">=</span><span class="hljs-keyword">copy</span>;<br></code></pre></div></td></tr></table></figure>
+<p>默认 alter 重建表其实是inplace的，对应图2执行流程。</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> A engine<span class="hljs-operator">=</span>innodb,ALGORITHM<span class="hljs-operator">=</span>inpalce;<br></code></pre></div></td></tr></table></figure>
+
+
+<p>Online 和 inpalce 两个逻辑之间的关系：</p>
+<ol>
+<li>DDL 过程如果是 Online，一定是 inplace 的；</li>
+<li>DDL 过程如果是 inplace的，不一定是 Online。如，添加全文索引（FULLTEXT index）和空间索引（SPATIAL index）</li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/DataBase-MySQL-07-MySQL-orderby%E6%8E%92%E5%BA%8F/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/DataBase-MySQL-05-MySQL%E6%A6%82%E6%8B%AC/">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="/js/diy/caidai.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

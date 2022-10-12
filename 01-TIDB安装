@@ -1,0 +1,577 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fishes.png">
+  <link rel="icon" href="/img/fishes.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Fuku Lee">
+  <meta name="keywords" content="">
+  
+  <title>01.TIDB安装 - Fuku</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/diy/shubiao.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>F's Log</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20210427005926.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="01.TIDB安装">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-10-12 11:28" pubdate>
+        2022年10月12日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      42
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">01.TIDB安装</h1>
+            
+            <div class="markdown-body">
+              <h2 id="TiDB部署"><a href="#TiDB部署" class="headerlink" title="TiDB部署"></a>TiDB部署</h2><p>官方文档：<a target="_blank" rel="noopener" href="https://docs.pingcap.com/zh/tidb/v4.0/quick-start-with-tidb#Linux">https://docs.pingcap.com/zh/tidb/v4.0/quick-start-with-tidb#Linux</a><br>参考链接：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/342785395">https://zhuanlan.zhihu.com/p/342785395</a></p>
+<h3 id="TiDB-关键字"><a href="#TiDB-关键字" class="headerlink" title="TiDB 关键字"></a>TiDB 关键字</h3><ul>
+<li>分布式关系型数据库 （以集群方式部署/安装）</li>
+<li>兼容 MySQL5.7 （。。。Oracle..案例很少）</li>
+<li>支持HTAP（在线事务处理和在线分析处理）</li>
+<li>对金融行业支持良好，高可用、强一致（Raft）和大数据场景</li>
+</ul>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p>TiDB 集群组件中的几个部分：</p>
+<ul>
+<li><strong>PD</strong>：Palcement Driver, 总控节点。<br>  负责集群的整体调度&amp;全局ID、全局时间戳TSO(中心化授时)的生成。 — 全局时钟的实现。</li>
+<li><strong>TiKV</strong> ： TiDB的存储层。<br>  分布式事务型的键值数据库，满足ACID事务，使用Raft协议保证多副本一致性，而且存储统计数据。</li>
+<li><strong>TiFalsh</strong>：HTAP形态的关键组件。<br>  是TiKV的列存扩展，在提供良好隔离性的同时，兼顾了强一致性。</li>
+<li><strong>Monitor</strong>：TiDB 监控组件。</li>
+</ul>
+<h3 id="单机部署实验环境"><a href="#单机部署实验环境" class="headerlink" title="单机部署实验环境"></a>单机部署实验环境</h3><p>TiDB快速部署方式有2种：</p>
+<ol>
+<li>使用 tiup 工具执行 <code>Tiup Playground</code> 快速部署本地测试环境。<br> 适用：利用本地 Mac 或者单机 Linux 环境快速部署 TiDB集群，可以体验 TiDB 集群的基本架构，以及TiDB、TiKV、PD、Monitor监控等基础组件的运行。</li>
+<li>使用 tiup cluster 在单机上模拟生产环境部署步骤。<br> 使用：用单台Linux服务器，体验 TiDB 最小的湾镇拖布的集群，并<code>模拟生产的部署步骤</code>。</li>
+</ol>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20211027145448.png" srcset="/img/loading.gif" lazyload alt="image-20211027145439294"></p>
+<p>此处采用第二种方式部署测试环境。即，编写 topo.yaml 文件，使用 tiup cluster deploy 的方式部署集群。</p>
+<p>环境：阿里云，操作系统：centos7.8</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">cat /etc/redhat-release<br></code></pre></div></td></tr></table></figure>
+
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20211027145954.png" srcset="/img/loading.gif" lazyload alt="环境"></p>
+<h4 id="部署步骤："><a href="#部署步骤：" class="headerlink" title="部署步骤："></a>部署步骤：</h4><h5 id="1-关闭防火墙"><a href="#1-关闭防火墙" class="headerlink" title="1. 关闭防火墙"></a>1. 关闭防火墙</h5><p>由于是在阿里云上，不可关闭防火墙，需要配置防火墙端口。如果是在虚拟机上，可以直接执行以下命令关闭防火墙。</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">systemctl stop firewalld<br>service iptables stop<br></code></pre></div></td></tr></table></figure>
+
+<p>阿里云开放防火墙端口：</p>
+<h2 id="防火墙设置相关端口命令"><a href="#防火墙设置相关端口命令" class="headerlink" title="防火墙设置相关端口命令"></a>防火墙设置相关端口命令</h2><p>在此以打开3306端口为例</p>
+<ol>
+<li>打开端口命令，出现success即为成功</li>
+</ol>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20210427143246.png" srcset="/img/loading.gif" lazyload alt="image-20210427143238270"></p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">firewall-cmd --zone=public --add-port=3306/tcp --permanent<br></code></pre></div></td></tr></table></figure>
+
+<ol start="2">
+<li>查看端口开放情况：<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">netstat -ntlp<br></code></pre></div></td></tr></table></figure>
+或：<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">firewall-cmd --list-ports<br></code></pre></div></td></tr></table></figure></li>
+</ol>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20210427143506.png" srcset="/img/loading.gif" lazyload alt="image-20210427143505255"></p>
+<h5 id="2-下载并安装TiUP"><a href="#2-下载并安装TiUP" class="headerlink" title="2. 下载并安装TiUP"></a>2. 下载并安装TiUP</h5><p>命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">curl --proto &#x27;=https&#x27; --tlsv1.2 -sSf https://tiup-mirrors.pingcap.com/install.sh | sh<br></code></pre></div></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">  %</span><span class="bash"> Total    % Received % Xferd  Average Speed   Time    Time     Time  Current</span><br>                                 Dload  Upload   Total   Spent    Left  Speed<br>100 8697k  100 8697k    0     0  4316k      0  0:00:02  0:00:02 --:--:-- 4318k<br>WARN: adding root certificate via internet: https://tiup-mirrors.pingcap.com/root.json<br>You can revoke this by remove /root/.tiup/bin/7b8e153f2e2d0928.root.json<br>Set mirror to https://tiup-mirrors.pingcap.com success<br>Detected shell: bash<br>Shell profile:  /root/.bash_profile<br>/root/.bash_profile has been modified to add tiup to PATH<br>open a new terminal or source /root/.bash_profile to use it<br>Installed path: /root/.tiup/bin/tiup<br>===============================================<br>Have a try:     tiup playground<br>===============================================<br></code></pre></div></td></tr></table></figure>
+
+<h5 id="3-安装-TiUP-的-cluster-组件"><a href="#3-安装-TiUP-的-cluster-组件" class="headerlink" title="3. 安装 TiUP 的 cluster 组件"></a>3. 安装 TiUP 的 cluster 组件</h5><ol>
+<li><p>声明全局的环境变量，不然找不到tiup命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">source .bash_profile <br></code></pre></div></td></tr></table></figure></li>
+<li><p>使用 tiup 工具安装cluster组件</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">tiup cluster<br></code></pre></div></td></tr></table></figure></li>
+</ol>
+<p>结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">The component `cluster` is not installed; downloading from repository.<br>download https://tiup-mirrors.pingcap.com/cluster-v1.3.1-linux-amd64.tar.gz 10.05 MiB / 10.05 MiB 100.00% 13.05 MiB p/s                                               <br>Starting component `cluster`: /root/.tiup/components/cluster/v1.3.1/tiup-cluster<br>Deploy a TiDB cluster for production<br><br>Usage:<br>  tiup cluster [command]<br><br>Available Commands:<br>  check       Perform preflight checks for the cluster.<br>  deploy      Deploy a cluster for production<br>  start       Start a TiDB cluster<br>  stop        Stop a TiDB cluster<br>  restart     Restart a TiDB cluster<br>  scale-in    Scale in a TiDB cluster<br>  scale-out   Scale out a TiDB cluster<br>  destroy     Destroy a specified cluster<br>  clean       (EXPERIMENTAL) Cleanup a specified cluster<br>  upgrade     Upgrade a specified TiDB cluster<br>  exec        Run shell command on host in the tidb cluster<br>  display     Display information of a TiDB cluster<br>  prune       Destroy and remove instances that is in tombstone state<br>  list        List all clusters<br>  audit       Show audit log of cluster operation<br>  import      Import an exist TiDB cluster from TiDB-Ansible<br>  edit-config Edit TiDB cluster config.<br>Will use editor from environment variable `EDITOR`, default use vi<br>  reload      Reload a TiDB cluster&#x27;s config and restart if needed<br>  patch       Replace the remote package with a specified package and restart the service<br>  rename      Rename the cluster<br>  enable      Enable a TiDB cluster automatically at boot<br>  disable     Disable starting a TiDB cluster automatically at boot<br>  help        Help about any command<br><br>Flags:<br>  -h, --help                help for tiup<br>      --ssh string          (EXPERIMENTAL) The executor type: &#x27;builtin&#x27;, &#x27;system&#x27;, &#x27;none&#x27;.<br>      --ssh-timeout uint    Timeout in seconds to connect host via SSH, ignored for operations that don&#x27;t need an SSH connection. (default 5)<br>  -v, --version             version for tiup<br>      --wait-timeout uint   Timeout in seconds to wait for an operation to complete, ignored for operations that don&#x27;t fit. (default 120)<br>  -y, --yes                 Skip all confirmations and assumes &#x27;yes&#x27;<br><br>Use &quot;tiup cluster help [command]&quot; for more information about a command.<br></code></pre></div></td></tr></table></figure>
+
+
+<h5 id="4-设置sshd服务的最大连接数限制为20"><a href="#4-设置sshd服务的最大连接数限制为20" class="headerlink" title="4. 设置sshd服务的最大连接数限制为20"></a>4. 设置sshd服务的最大连接数限制为20</h5><p>使用 root 权限，修改 <code>/etc/ssh/sshd_config</code> 文件中下面参数的配置：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">MaxSessions 20<br></code></pre></div></td></tr></table></figure>
+
+<p>修改后重启sshd：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">service sshd restart<br></code></pre></div></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">Redirecting to /bin/systemctl restart sshd.service<br></code></pre></div></td></tr></table></figure>
+
+<h5 id="5-编写集群配置模板文件-topo-yaml"><a href="#5-编写集群配置模板文件-topo-yaml" class="headerlink" title="5. 编写集群配置模板文件 topo.yaml"></a>5. 编写集群配置模板文件 topo.yaml</h5><p>配置模板文件 topo.yaml，内容如下。<br>注意两点：</p>
+<ul>
+<li>文件中的host是部署TiDB的服务器ip</li>
+<li>ssh_port默认为22<br>官网示例配置中 tikv_servers 是3个节点，这里设置只有1个节点，原因：配置多个节点时只有1个节点能够启动成功。<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><br><span class="hljs-comment"># # Global variables are applied to all deployments and used as the default value of</span><br><span class="hljs-comment"># # the deployments if a specific deployment value is missing.</span><br><span class="hljs-attr">global:</span><br> <span class="hljs-attr">user:</span> <span class="hljs-string">&quot;tidb&quot;</span><br> <span class="hljs-attr">ssh_port:</span> <span class="hljs-number">22</span><br> <span class="hljs-attr">deploy_dir:</span> <span class="hljs-string">&quot;/tidb-deploy&quot;</span><br> <span class="hljs-attr">data_dir:</span> <span class="hljs-string">&quot;/tidb-data&quot;</span><br><br><span class="hljs-comment"># # Monitored variables are applied to all the machines.</span><br><span class="hljs-attr">monitored:</span><br> <span class="hljs-attr">node_exporter_port:</span> <span class="hljs-number">9100</span><br> <span class="hljs-attr">blackbox_exporter_port:</span> <span class="hljs-number">9115</span><br><br><span class="hljs-attr">server_configs:</span><br> <span class="hljs-attr">tidb:</span><br>   <span class="hljs-attr">log.slow-threshold:</span> <span class="hljs-number">300</span><br> <span class="hljs-attr">tikv:</span><br>   <span class="hljs-attr">readpool.storage.use-unified-pool:</span> <span class="hljs-literal">false</span><br>   <span class="hljs-attr">readpool.coprocessor.use-unified-pool:</span> <span class="hljs-literal">true</span><br> <span class="hljs-attr">pd:</span><br>   <span class="hljs-attr">replication.enable-placement-rules:</span> <span class="hljs-literal">true</span><br>   <span class="hljs-attr">replication.location-labels:</span> [<span class="hljs-string">&quot;host&quot;</span>]<br> <span class="hljs-attr">tiflash:</span><br>   <span class="hljs-attr">logger.level:</span> <span class="hljs-string">&quot;info&quot;</span><br><br><span class="hljs-attr">pd_servers:</span><br> <span class="hljs-bullet">-</span> <span class="hljs-attr">host:</span> <span class="hljs-number">120.78</span><span class="hljs-number">.89</span><span class="hljs-number">.132</span><br><br><span class="hljs-attr">tidb_servers:</span><br> <span class="hljs-bullet">-</span> <span class="hljs-attr">host:</span> <span class="hljs-number">120.78</span><span class="hljs-number">.89</span><span class="hljs-number">.132</span><br><br><span class="hljs-attr">tikv_servers:</span><br> <span class="hljs-bullet">-</span> <span class="hljs-attr">host:</span> <span class="hljs-number">120.78</span><span class="hljs-number">.89</span><span class="hljs-number">.132</span><br>   <span class="hljs-attr">port:</span> <span class="hljs-number">20160</span><br>   <span class="hljs-attr">status_port:</span> <span class="hljs-number">20180</span><br>   <span class="hljs-attr">config:</span><br>     <span class="hljs-attr">server.labels:</span> &#123; <span class="hljs-attr">host:</span> <span class="hljs-string">&quot;logic-host-1&quot;</span> &#125;<br><br><span class="hljs-comment"># - host: 120.78.89.132</span><br><span class="hljs-comment">#   port: 20161</span><br><span class="hljs-comment">#   status_port: 20181</span><br><span class="hljs-comment">#   config:</span><br><span class="hljs-comment">#     server.labels: &#123; host: &quot;logic-host-2&quot; &#125;</span><br><br><span class="hljs-comment"># - host: 120.78.89.132</span><br><span class="hljs-comment">#   port: 20162</span><br><span class="hljs-comment">#   status_port: 20182</span><br><span class="hljs-comment">#   config:</span><br><span class="hljs-comment">#     server.labels: &#123; host: &quot;logic-host-3&quot; &#125;</span><br><br><span class="hljs-attr">tiflash_servers:</span><br> <span class="hljs-bullet">-</span> <span class="hljs-attr">host:</span> <span class="hljs-number">120.78</span><span class="hljs-number">.89</span><span class="hljs-number">.132</span><br></code></pre></div></td></tr></table></figure></li>
+</ul>
+<h5 id="6-部署集群"><a href="#6-部署集群" class="headerlink" title="6. 部署集群"></a>6. 部署集群</h5><ol>
+<li><p>部署集群命令格式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">tiup cluster deploy &lt;集群名称&gt; &lt;TiDB版本号&gt; ./topo.yaml --user root -p<br></code></pre></div></td></tr></table></figure></li>
+<li><p>示例命令<br>集群名称为 ：mytidb-cluster TiDB版本号为：v3.1.2 </p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">tiup cluster deploy mytidb-cluster v3.1.2 ./topo.yaml --user root -p<br></code></pre></div></td></tr></table></figure></li>
+</ol>
+<p>执行命令后，输出日志：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">Starting component `cluster`: /root/.tiup/components/cluster/v1.3.1/tiup-cluster deploy mytidb-cluster v3.1.2 ./topo.yaml --user root -p<br>Please confirm your topology:<br>Cluster type:    tidb<br>Cluster name:    mytidb-cluster<br>Cluster version: v3.1.2<br>Type        Host            Ports                            OS/Arch       Directories<br>----        ----            -----                            -------       -----------<br>pd          192.168.59.146  2379/2380                        linux/x86_64  /tidb-deploy/pd-2379,/tidb-data/pd-2379<br>tikv        192.168.59.146  20160/20180                      linux/x86_64  /tidb-deploy/tikv-20160,/tidb-data/tikv-20160<br>tidb        192.168.59.146  4000/10080                       linux/x86_64  /tidb-deploy/tidb-4000<br>tiflash     192.168.59.146  9000/8123/3930/20170/20292/8234  linux/x86_64  /tidb-deploy/tiflash-9000,/tidb-data/tiflash-9000<br>prometheus  192.168.59.146  9090                             linux/x86_64  /tidb-deploy/prometheus-9090,/tidb-data/prometheus-9090<br>grafana     192.168.59.146  3000                             linux/x86_64  /tidb-deploy/grafana-3000<br>Attention:<br>    1. If the topology is not what you expected, check your yaml file.<br>    2. Please confirm there is no port/directory conflicts in same host.<br>Do you want to continue? [y/N]:  y<br>Input SSH password: <br>+ Generate SSH keys ... Done<br>+ Download TiDB components<br>  - Download pd:v3.1.2 (linux/amd64) ... Done<br>  - Download tikv:v3.1.2 (linux/amd64) ... Done<br>  - Download tidb:v3.1.2 (linux/amd64) ... Done<br>  - Download tiflash:v3.1.2 (linux/amd64) ... Done<br>  - Download prometheus:v3.1.2 (linux/amd64) ... Done<br>  - Download grafana:v3.1.2 (linux/amd64) ... Done<br>  - Download node_exporter:v0.17.0 (linux/amd64) ... Done<br>  - Download blackbox_exporter:v0.12.0 (linux/amd64) ... Done<br>+ Initialize target host environments<br>  - Prepare 192.168.59.146:22 ... Done<br>+ Copy files<br>  - Copy pd -&gt; 192.168.59.146 ... Done<br>  - Copy tikv -&gt; 192.168.59.146 ... Done<br>  - Copy tidb -&gt; 192.168.59.146 ... Done<br>  - Copy tiflash -&gt; 192.168.59.146 ... Done<br>  - Copy prometheus -&gt; 192.168.59.146 ... Done<br>  - Copy grafana -&gt; 192.168.59.146 ... Done<br>  - Copy node_exporter -&gt; 192.168.59.146 ... Done<br>  - Copy blackbox_exporter -&gt; 192.168.59.146 ... Done<br>+ Check status<br>Enabling component pd<br>        Enabling instance pd 192.168.59.146:2379<br>        Enable pd 192.168.59.146:2379 success<br>Enabling component node_exporter<br>Enabling component blackbox_exporter<br>Enabling component tikv<br>        Enabling instance tikv 192.168.59.146:20160<br>        Enable tikv 192.168.59.146:20160 success<br>Enabling component tidb<br>        Enabling instance tidb 192.168.59.146:4000<br>        Enable tidb 192.168.59.146:4000 success<br>Enabling component tiflash<br>        Enabling instance tiflash 192.168.59.146:9000<br>        Enable tiflash 192.168.59.146:9000 success<br>Enabling component prometheus<br>        Enabling instance prometheus 192.168.59.146:9090<br>        Enable prometheus 192.168.59.146:9090 success<br>Enabling component grafana<br>        Enabling instance grafana 192.168.59.146:3000<br>        Enable grafana 192.168.59.146:3000 success<br>Cluster `mytidb-cluster` deployed successfully, you can start it with command: `tiup cluster start mytidb-cluster`<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+<h5 id="7-启动集群"><a href="#7-启动集群" class="headerlink" title="7. 启动集群"></a>7. 启动集群</h5><p>执行启动集群命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">tiup cluster start mytidb-cluster<br></code></pre></div></td></tr></table></figure>
+<p>启动成功日志：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">Starting component `cluster`: /root/.tiup/components/cluster/v1.3.1/tiup-cluster start mytidb-cluster<br>Starting cluster mytidb-cluster...<br>+ [ Serial ] - SSHKeySet: privateKey=/root/.tiup/storage/cluster/clusters/mytidb-cluster/ssh/id_rsa, publicKey=/root/.tiup/storage/cluster/clusters/mytidb-cluster/ssh/id_rsa.pub<br>+ [Parallel] - UserSSH: user=tidb, host=192.168.59.146<br>+ [Parallel] - UserSSH: user=tidb, host=192.168.59.146<br>+ [Parallel] - UserSSH: user=tidb, host=192.168.59.146<br>+ [Parallel] - UserSSH: user=tidb, host=192.168.59.146<br>+ [Parallel] - UserSSH: user=tidb, host=192.168.59.146<br>+ [Parallel] - UserSSH: user=tidb, host=192.168.59.146<br>+ [ Serial ] - StartCluster<br>Starting component pd<br>        Starting instance pd 192.168.59.146:2379<br>        Start pd 192.168.59.146:2379 success<br>Starting component node_exporter<br>        Starting instance 192.168.59.146<br>        Start 192.168.59.146 success<br>Starting component blackbox_exporter<br>        Starting instance 192.168.59.146<br>        Start 192.168.59.146 success<br>Starting component tikv<br>        Starting instance tikv 192.168.59.146:20160<br>        Start tikv 192.168.59.146:20160 success<br>Starting component tidb<br>        Starting instance tidb 192.168.59.146:4000<br>        Start tidb 192.168.59.146:4000 success<br>Starting component tiflash<br>        Starting instance tiflash 192.168.59.146:9000<br>        Start tiflash 192.168.59.146:9000 success<br>Starting component prometheus<br>        Starting instance prometheus 192.168.59.146:9090<br>        Start prometheus 192.168.59.146:9090 success<br>Starting component grafana<br>        Starting instance grafana 192.168.59.146:3000<br>        Start grafana 192.168.59.146:3000 success<br>+ [ Serial ] - UpdateTopology: cluster=mytidb-cluster<br>Started cluster `mytidb-cluster` successfully<br></code></pre></div></td></tr></table></figure>
+
+
+<h5 id="8-使用-tiup-查看集群"><a href="#8-使用-tiup-查看集群" class="headerlink" title="8. 使用 tiup 查看集群"></a>8. 使用 tiup 查看集群</h5><ul>
+<li>查看已经部署的集群状态<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">tiup cluster list<br></code></pre></div></td></tr></table></figure></li>
+</ul>
+<p>结果：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">Starting component `cluster`: /root/.tiup/components/cluster/v1.6.1/tiup-cluster list<br>Name       User  Version  Path                                            PrivateKey<br>----       ----  -------  ----                                            ----------<br>tidb-test  tidb  v3.1.2   /root/.tiup/storage/cluster/clusters/tidb-test  /root/.tiup/storage/cluster/clusters/tidb-test/ssh/id_rsa<br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>查看集群的拓扑结果和状态<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">tiup cluster display &lt;cluster-name&gt;<br></code></pre></div></td></tr></table></figure></li>
+</ul>
+<p>测试：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">tiup cluster display tidb-test<br></code></pre></div></td></tr></table></figure>
+<p>结果:</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">Starting component `cluster`: /root/.tiup/components/cluster/v1.6.1/tiup-cluster display tidb-test<br>Cluster type:       tidb<br>Cluster name:       tidb-test<br>Cluster version:    v3.1.2<br>Deploy user:        tidb<br>SSH type:           builtin<br>ID                    Role     Host            Ports                            OS/Arch       Status  Data Dir                 Deploy Dir<br>--                    ----     ----            -----                            -------       ------  --------                 ----------<br>192.168.56.104:2379   pd       192.168.56.104  2379/2380                        linux/x86_64  Up|L    /tidb-data/pd-2379       /tidb-deploy/pd-2379<br>192.168.56.104:4000   tidb     192.168.56.104  4000/10080                       linux/x86_64  Up      -                        /tidb-deploy/tidb-4000<br>192.168.56.104:9000   tiflash  192.168.56.104  9000/8123/3930/20170/20292/8234  linux/x86_64  Up      /tidb-data/tiflash-9000  /tidb-deploy/tiflash-9000<br>192.168.56.104:20160  tikv     192.168.56.104  20160/20180                      linux/x86_64  Up      /tidb-data/tikv-20160    /tidb-deploy/tikv-20160<br>Total nodes: 4<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h5 id="9-使用-MySQL-客户端访问-TiDB-数据库"><a href="#9-使用-MySQL-客户端访问-TiDB-数据库" class="headerlink" title="9. 使用 MySQL 客户端访问 TiDB 数据库"></a>9. 使用 MySQL 客户端访问 TiDB 数据库</h5><p>TiDB没有提供数据库客户端，需要额外安装 MySQL 客户端</p>
+<ol>
+<li>安装 MySQL 客户端，如果已安装可以跳过此步骤<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">yum -y install mysql<br></code></pre></div></td></tr></table></figure></li>
+<li>访问数据库</li>
+</ol>
+<ul>
+<li>本地访问<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">mysql -h 10.0.1.1 -P 4000 -u root<br></code></pre></div></td></tr></table></figure></li>
+</ul>
+<p>看到 <code>mysql&gt;</code> 命令行即为访问成功。</p>
+<p>进行相关的创建用户，修改密码，授权等。</p>
+<ul>
+<li>支持远程使用MySQL连接工具访问<br>TiDB支持MySQL客户端访问，使用sqlyog远程登录TiDB，使用上述配置好的用户密码进行远程连接登录即可。<br>使用 idea 内置工具登录TiDB，用户名密码，地址192.168.59.149，端口4000</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+                    
+                      <a class="hover-with-bg" href="/tags/NewSQL%E6%95%B0%E6%8D%AE%E5%BA%93/">NewSQL数据库</a>
+                    
+                      <a class="hover-with-bg" href="/tags/PingCAP/">PingCAP</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/DataBase-TIDB-study-02-RDBMS%E7%9A%84%E4%BA%8B%E5%8A%A1/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">02-RDBMS的事务</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/DataBase-TIDB-study-01-TiDB%E4%B8%8EMySQL%E7%9A%84%E5%85%BC%E5%AE%B9%E6%80%A7/">
+                        <span class="hidden-mobile">01-TiDB与MySQL的兼容性</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="/js/diy/caidai.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

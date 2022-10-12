@@ -1,0 +1,509 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fishes.png">
+  <link rel="icon" href="/img/fishes.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Fuku Lee">
+  <meta name="keywords" content="">
+  
+  <title>01-this的指向由执行上下文动态确定 - Fuku</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/diy/shubiao.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>F's Log</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20210427005926.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="01-this的指向由执行上下文动态确定">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-10-12 11:28" pubdate>
+        2022年10月12日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      23
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">01-this的指向由执行上下文动态确定</h1>
+            
+            <div class="markdown-body">
+              <p>参考链接：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/625a84c0b43f">https://www.jianshu.com/p/625a84c0b43f</a></p>
+<h2 id="this-相关知识点："><a href="#this-相关知识点：" class="headerlink" title="this 相关知识点："></a>this 相关知识点：</h2><h3 id="this-到底指向谁"><a href="#this-到底指向谁" class="headerlink" title="this 到底指向谁"></a>this 到底指向谁</h3><p>结论：this 的指向，是在调用函数时根据执行上下文所动态确定的。</p>
+<p>具体环节和规则，可以先「死记硬背」以下几条规律，后面来慢慢一一分析：</p>
+<ul>
+<li>在函数体中，简单调用该函数时（非显式/隐式绑定下），严格模式下 this 绑定到undefined，否则绑定到全局对象 window／global；</li>
+<li>一般构造函数 new 调用，绑定到新创建的对象上；</li>
+<li>一般由 call/apply/bind 方法显式调用，绑定到指定参数的对象上；</li>
+<li>一般由上下文对象调用，绑定在该对象上；</li>
+<li>箭头函数中，根据外层上下文绑定的 this 决定 this 指向。</li>
+</ul>
+<h2 id="实战例题分析"><a href="#实战例题分析" class="headerlink" title="实战例题分析"></a>实战例题分析</h2><h3 id="例题组合-1：全局环境下的-this"><a href="#例题组合-1：全局环境下的-this" class="headerlink" title="例题组合 1：全局环境下的 this"></a>例题组合 1：全局环境下的 this</h3><h4 id="结论："><a href="#结论：" class="headerlink" title="结论："></a>结论：</h4><p>在执行函数时，如果函数中的 this 是被上一级的对象所调用，那么 this 指向的就是上一级的对象；否则指向全局环境。</p>
+<h3 id="例题组合-2：上下文对象调用中的-this"><a href="#例题组合-2：上下文对象调用中的-this" class="headerlink" title="例题组合 2：上下文对象调用中的 this"></a>例题组合 2：上下文对象调用中的 this</h3><h4 id="结论：-1"><a href="#结论：-1" class="headerlink" title="结论："></a>结论：</h4><p>this 指向最后调用它的对象，在 fn 执行时，挂到 o2 对象上即可，我们提前进行了赋值操作。</p>
+<h3 id="例题组合-3：bind-call-apply-改变-this-指向"><a href="#例题组合-3：bind-call-apply-改变-this-指向" class="headerlink" title="例题组合 3：bind/call/apply 改变 this 指向"></a>例题组合 3：bind/call/apply 改变 this 指向</h3><p>一句话总结，他们都是用来改变相关函数 this 指向的，但是 call/apply 是直接进行相关函数调用；bind 不会执行相关函数，而是返回一个新的函数，这个新的函数已经自动绑定了新的 this 指向，开发者需要手动调用即可。</p>
+<h4 id="结论：-2"><a href="#结论：-2" class="headerlink" title="结论："></a>结论：</h4><h3 id="例题组合-4：构造函数和-this"><a href="#例题组合-4：构造函数和-this" class="headerlink" title="例题组合 4：构造函数和 this"></a>例题组合 4：构造函数和 this</h3><figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Foo</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">this</span>.bar = <span class="hljs-string">&#x27;Lucas&#x27;</span>;<br>&#125;<br><br><span class="hljs-keyword">const</span> instance = <span class="hljs-keyword">new</span> Foo();<br><span class="hljs-built_in">console</span>.log(instance.bar); <span class="hljs-comment">// Lucas</span><br></code></pre></div></td></tr></table></figure>
+<p>答案将会输出 Lucas。<br>但是这样的场景往往伴随着下一个问题：new 操作符调用构造函数，具体做了什么？<br>以下供参考：</p>
+<ul>
+<li>创建一个新的对象；</li>
+<li>将构造函数的 this 指向这个新对象；</li>
+<li>为这个对象添加属性、方法等；</li>
+<li>最终返回新对象。<br>以上new操作符过程，用代码表述为：<figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-keyword">var</span> obj = &#123;&#125;;<br>obj.__proto__ = Foo.prototype;<br>Foo.call(obj);<br><br><span class="hljs-built_in">console</span>.log(obj.bar); <span class="hljs-comment">// Lucas</span><br></code></pre></div></td></tr></table></figure>
+这里对 new 的模拟是一个简单基本版的，更复杂的情况会在原型、原型链相关的《面向对象和原型——永不过时的话题》中讲述。</li>
+</ul>
+<blockquote>
+<p>需要指出的是，如果在构造函数中出现了显式 return 的情况，那么需要注意分为两种场景：</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Foo</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">this</span>.user = <span class="hljs-string">&#x27;Lucas&#x27;</span>;<br>  <span class="hljs-keyword">const</span> o = &#123;&#125;;<br>  <span class="hljs-keyword">return</span> o;<br>&#125;<br><br><span class="hljs-keyword">const</span> instance = <span class="hljs-keyword">new</span> Foo();<br><span class="hljs-built_in">console</span>.log(instance.user); <span class="hljs-comment">// undef将会输出 undefined，此时 instance 是返回的空对象 o。ined</span><br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Foo</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">this</span>.user = <span class="hljs-string">&#x27;Lucas&#x27;</span>;<br>  <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>&#125;<br><br><span class="hljs-keyword">const</span> instance = <span class="hljs-keyword">new</span> Foo();<br><span class="hljs-built_in">console</span>.log(instance.user); <span class="hljs-comment">//  将会输出 Lucas，也就是说此时 instance 是返回的目标对象实例 this。</span><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="结论：-3"><a href="#结论：-3" class="headerlink" title="结论："></a>结论：</h4><p>结论：如果构造函数中显式返回一个值，且返回的是一个对象，那么 this 就指向这个返回的对象；如果返回的不是一个对象，那么 this 仍然指向实例。</p>
+<h3 id="例题组合-5：箭头函数中的-this-指向"><a href="#例题组合-5：箭头函数中的-this-指向" class="headerlink" title="例题组合 5：箭头函数中的 this 指向"></a>例题组合 5：箭头函数中的 this 指向</h3><h4 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h4><figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-keyword">const</span> foo = &#123;<br>  fn: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>      <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>);  <span class="hljs-comment">// 这道题中，this 出现在 setTimeout() 中的匿名函数里，因此 this 指向 window 对象。</span><br>    &#125;);<br>  &#125;,<br>&#125;;<br><br>foo.fn(); <span class="hljs-comment">// window</span><br></code></pre></div></td></tr></table></figure>
+
+<p>使用箭头函数改变this指向</p>
+<figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-keyword">const</span> foo = &#123;<br>  fn: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;  <span class="hljs-comment">// 使用箭头函数改变this指向</span><br>      <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>);<br>    &#125;);<br>  &#125;,<br>&#125;;<br><br>foo.fn(); <span class="hljs-comment">// &#123;fn:f&#125;</span><br></code></pre></div></td></tr></table></figure>
+<h4 id="结论：-4"><a href="#结论：-4" class="headerlink" title="结论："></a>结论：</h4><p>箭头函数使用 this 不适用以上标准规则，而是根据外层（函数或者全局）上下文来决定。<br>单纯箭头函数中的 this 非常简单，但是综合所有情况，结合 this 的优先级考察，这时候 this 指向并不好确定。请继续阅读。</p>
+<h3 id="例题组合-6：this-优先级相关"><a href="#例题组合-6：this-优先级相关" class="headerlink" title="例题组合 6：this 优先级相关"></a>例题组合 6：this 优先级相关</h3><p>我们常常把通过 call、apply、bind、new 对 this 绑定的情况称为显式绑定；根据调用关系确定的 this 指向称为隐式绑定  </p>
+<p>那么显式绑定和隐式绑定谁的优先级更高呢？</p>
+<h4 id="题目：-1"><a href="#题目：-1" class="headerlink" title="题目："></a>题目：</h4><figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">a</span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>.a);<br>&#125;<br><br><span class="hljs-keyword">const</span> obj1 = &#123;<br>  a: <span class="hljs-number">1</span>,<br>  foo: foo,<br>&#125;;<br><br><span class="hljs-keyword">const</span> obj2 = &#123;<br>  a: <span class="hljs-number">2</span>,<br>  foo: foo,<br>&#125;;<br><br>obj1.foo.call(obj2); <span class="hljs-comment">// 2</span><br>obj2.foo.call(obj1); <span class="hljs-comment">// 1</span><br></code></pre></div></td></tr></table></figure>
+<p>输出2和1，表示call/apply的显示绑定一般来说优先级更高</p>
+<figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">a</span>) </span>&#123;<br>  <span class="hljs-built_in">this</span>.a = a;<br>&#125;<br><br><span class="hljs-keyword">const</span> obj1 = &#123;&#125;;<br><span class="hljs-keyword">var</span> bar = foo.bind(obj1);<br>bar(<span class="hljs-number">2</span>);<br><span class="hljs-built_in">console</span>.log(obj1.a); <span class="hljs-comment">// 2</span><br></code></pre></div></td></tr></table></figure>
+<p>上述代码通过 bind，将 bar 函数中的 this 绑定为 obj1 对象。执行 bar(2) 后，obj1.a 值为 2。即经过 bar(2) 执行后，obj1 对象为：{a: 2}。</p>
+<p>当再使用 bar 作为构造函数时：</p>
+<figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-keyword">var</span> baz = <span class="hljs-keyword">new</span> bar(<span class="hljs-number">3</span>)<br><span class="hljs-built_in">console</span>.log(baz.a) <span class="hljs-comment">// 3</span><br></code></pre></div></td></tr></table></figure>
+<p>将会输出 3。我们看 bar 函数本身是通过 bind 方法构造的函数，其内部已经对将 this 绑定为 obj1，它再作为构造函数，通过 new 调用时，返回的实例已经与 obj1 解绑。 也就是说：new 绑定修改了 bind 绑定中的 this，因此 new 绑定的优先级比显式 bind 绑定更高。</p>
+<figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">a</span>) =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>.a);<br>  &#125;;<br>&#125;<br><br><span class="hljs-keyword">const</span> obj1 = &#123;<br>  a: <span class="hljs-number">2</span>,<br>&#125;;<br><br><span class="hljs-keyword">const</span> obj2 = &#123;<br>  a: <span class="hljs-number">3</span>,<br>&#125;;<br><br><span class="hljs-keyword">const</span> bar = foo.call(obj1);<br>bar.call(obj2); <span class="hljs-comment">// 2</span><br></code></pre></div></td></tr></table></figure>
+
+<p>将会输出 2。由于 foo() 的 this 绑定到 obj1，bar（引用箭头函数）的 this 也会绑定到 obj1，箭头函数的绑定无法被修改。</p>
+<p>如果将 foo 完全写成箭头函数的形式：</p>
+<figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-keyword">var</span> a = <span class="hljs-number">123</span>;<br>  <span class="hljs-keyword">const</span> foo = <span class="hljs-function">() =&gt;</span> <span class="hljs-function">(<span class="hljs-params">a</span>) =&gt;</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>.a);<br>  &#125;;<br><br>  <span class="hljs-keyword">const</span> obj1 = &#123;<br>    a: <span class="hljs-number">2</span>,<br>  &#125;;<br><br>  <span class="hljs-keyword">const</span> obj2 = &#123;<br>    a: <span class="hljs-number">3</span>,<br>  &#125;;<br><br>  <span class="hljs-keyword">const</span> bar = foo.call(obj1);<br>  <span class="hljs-built_in">console</span>.log(bar.call(obj2)); <span class="hljs-comment">// 123</span><br></code></pre></div></td></tr></table></figure>
+<p>将会输出 123.<br>「抖个机灵」，仅仅将上述代码的第一处变量 a 的赋值改为：const a = 123;</p>
+<figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-keyword">const</span> a = <span class="hljs-number">123</span>;<br><span class="hljs-keyword">const</span> foo = <span class="hljs-function">() =&gt;</span> <span class="hljs-function">(<span class="hljs-params">a</span>) =&gt;</span> &#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>.a);<br>&#125;;<br><br><span class="hljs-keyword">const</span> obj1 = &#123;<br>  a: <span class="hljs-number">2</span>,<br>&#125;;<br><br><span class="hljs-keyword">const</span> obj2 = &#123;<br>  a: <span class="hljs-number">3</span>,<br>&#125;;<br><br><span class="hljs-keyword">const</span> bar = foo.call(obj1);<br>bar.call(obj2); <span class="hljs-comment">// undefined</span><br></code></pre></div></td></tr></table></figure>
+<p>答案将会输出为 undefined，原因是因为使用 const 声明的变量不会挂载到 window 全局对象当中。因此 this 指向 window 时，自然也找不到 a 变量了。</p>
+<h4 id="结论：-5"><a href="#结论：-5" class="headerlink" title="结论："></a>结论：</h4><p>优先级排序：call/apply &gt; new &gt; bind<br>call/apply/bind 是显示绑定this，new则是隐式绑定this </p>
+<h2 id="开放例题分析"><a href="#开放例题分析" class="headerlink" title="开放例题分析"></a>开放例题分析</h2><h3 id="最典型的一道题目为：实现一个-bind-函数。"><a href="#最典型的一道题目为：实现一个-bind-函数。" class="headerlink" title="最典型的一道题目为：实现一个 bind 函数。"></a>最典型的一道题目为：实现一个 bind 函数。</h3><figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-built_in">Function</span>.prototype.bind =<br>  <span class="hljs-built_in">Function</span>.prototype.bind ||<br>  <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">context</span>) </span>&#123;<br>    <span class="hljs-keyword">var</span> me = <span class="hljs-built_in">this</span>;<br>    <span class="hljs-keyword">var</span> args = <span class="hljs-built_in">Array</span>.prototype.slice.call(<span class="hljs-built_in">arguments</span>, <span class="hljs-number">1</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">bound</span>(<span class="hljs-params"></span>) </span>&#123;<br>      <span class="hljs-keyword">var</span> innerArgs = <span class="hljs-built_in">Array</span>.prototype.slice.call(<span class="hljs-built_in">arguments</span>);<br>      <span class="hljs-keyword">var</span> finalArgs = args.concat(innerArgs);<br>      <span class="hljs-keyword">return</span> me.apply(context, finalArgs);<br>    &#125;;<br>  &#125;;<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>分析：就如同之前 this 优先级分析所示：bind 返回的函数如果作为构造函数，搭配 new 关键字出现的话，我们的绑定 this 就需要「被忽略」。为了实现这样的规则，开发者就应该需要考虑如何区分这两种调用方式。具体来讲 bound 函数中就要进行 this instanceof 的判断。<br>另外一个细节是，函数具有 length 属性，表示形参的个数。上述实现方式形参的个数显然会失真。我们的实现就需要对 length 属性进行还原。可是难点在于：函数的 length 属性值是不可重写的。<br>我们看到 this 纷繁多象，确实不容易彻底掌握。本节尽可能系统地进行讲解、说明，例题尽可能地覆盖更多 case。与此同时，需要读者在阅读之外继续进行消化与吸收。只有「记死」，才能「用活」。</p>
+</blockquote>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/lc/">lc</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BB%83%E4%B9%A0/">练习</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/vue-cli-%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E8%BF%9B%E9%98%B6-00-%E6%A8%A1%E6%9D%BF/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">01-xxxx</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/tools-git-maven-02-git%E5%9B%9E%E6%BB%9A%E5%88%86%E6%94%AF%E4%BB%A3%E7%A0%81/">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="/js/diy/caidai.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

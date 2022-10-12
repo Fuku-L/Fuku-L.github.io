@@ -1,0 +1,521 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fishes.png">
+  <link rel="icon" href="/img/fishes.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Fuku Lee">
+  <meta name="keywords" content="">
+  
+  <title>Fuku</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/diy/shubiao.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>F's Log</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20210427005926.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-10-12 11:28" pubdate>
+        2022年10月12日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      34
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            <div class="markdown-body">
+              <h1 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h1><h2 id="堆的概念"><a href="#堆的概念" class="headerlink" title="堆的概念"></a>堆的概念</h2><p>可以近似看成是优先队列，但是实现形式是二叉树结构。</p>
+<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p><strong>动态</strong>求极值<br>动态 – 在满足插队情况（找到对应位置并插入元素）时间复杂度为 O(logN) 的条件下，使得求极值（最大or最小值）的时间复杂度为 O(1)。</p>
+<p>因此，选择的数据结构上需要满足：一个有序列表，其插入元素的时间复杂度为 O(logN). – 数组不行（移动数组的情况代价很大），链表可以（有序列表可以通过跳表优化查找时间），二叉树可以。</p>
+<p>引用：</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs asciidoc">上面这个场景单纯使用数组和链表都可以满足需求，但是使用其他数据结构在应对”插队“的情况表现地会更好。<br><br>具体来说：<br><br><span class="hljs-bullet">* </span>如果永远都维护一个有序数组的方式取极值很容易，但是插队麻烦。<br><br><span class="hljs-bullet">* </span>如果永远都维护一个有序链表的方式取极值也容易。 不过要想查找足够快，而不是线性扫描，就需要借助索引，这种实现对应的就是优先级队列的跳表实现。<br><br><span class="hljs-bullet">* </span>如果永远都维护一个树的方式取极值也可以实现，比如根节点就是极值，这样 O(1) 也可以取到极值，但是调整过程需要 $O(logN)$。这种实现对应的就是优先级队列的二叉堆实现。<br><br>简单总结下就是，堆就是动态帮你求极值的。当你需要动态求最大或最小值就就用它。而具体怎么实现，复杂度的分析我们之后讲，现在你只要记住使用场景，堆是如何解决这些问题的以及堆的 api 就够了。<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+<h2 id="队列-VS-优先队列"><a href="#队列-VS-优先队列" class="headerlink" title="队列 VS 优先队列"></a>队列 VS 优先队列</h2><p>普通的队列也可以看成是一个特殊的优先级队列， 这和网上大多数的说法优先级队列和队列没什么关系有所不同。我认为<strong>队列无非就是以时间这一变量作为优先级的优先队列</strong>，时间越早，优先级越高，优先级越高越先出队。</p>
+<p>大家平时写 BFS 的时候都会用到队列来帮你处理节点的访问顺序。那使用优先队列行不行？当然可以了！</p>
+<p>例题：<br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-bottom-left-tree-value/solution/">513. 找树左下角的值</a> – <a target="_blank" rel="noopener" href="https://www.cnblogs.com/lemon-flm/p/7877898.html">Java队列相关知识</a></p>
+<h2 id="一个中心"><a href="#一个中心" class="headerlink" title="一个中心"></a>一个中心</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p><code>动态</code> + <code>求极值</code> –&gt; 维护一个有序列表</p>
+<p>tips: 求一个数组的第 k 小的数</p>
+<p>由于堆只能求极值。比如能求最小值，但不能直接求第 k 小的值。先求最小的值，然后将其出队，重复k次，即得到第k小的数。<br>这个过程中给，数据是动态变化的，对应的是堆的大小在变化。</p>
+<h3 id="堆应用的例题"><a href="#堆应用的例题" class="headerlink" title="堆应用的例题:"></a>堆应用的例题:</h3><ol>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/last-stone-weight/">1046. 最后一块石头的重量</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/super-ugly-number/">313.超级丑数</a></li>
+</ol>
+<h2 id="堆的两种实现"><a href="#堆的两种实现" class="headerlink" title="堆的两种实现"></a>堆的两种实现</h2><p>堆的两种常见实现方式：</p>
+<ol>
+<li>基于链表的实现 - 跳表</li>
+<li>基于数组的实现 - 二叉堆</li>
+</ol>
+<blockquote>
+<p>使用跳表实现，如果算法没有进行优化，性能不稳定，数据量大的情况下内存占用会明显增加。 – 下面只是阐述了跳表的基本原理(实现待定)</p>
+</blockquote>
+<h3 id="跳表实现堆"><a href="#跳表实现堆" class="headerlink" title="跳表实现堆"></a>跳表实现堆</h3><p>跳表也是一种数据结构，因此 ta 其实也是服务于某种算法的，主要应用于：空间换时间的思想，效率的取舍问题等。</p>
+<p>上面提到了<code>应付插队问题</code>是设计堆应该考虑的首要问题。堆的跳表实现是如何解决这个问题的呢？</p>
+<p>选择链表相关结构实现堆：</p>
+<ol>
+<li>普通的单链表结构 的查找需要从头结点开始，时间复杂度 O(N), 空间复杂度 O(N)</li>
+<li>哈希表+单链表结构 的查找， 时间复杂度 O(1), 空间复杂度 O(2N). – 不够通用，不是和有重复结点的情况（否则需要排序），只适合用 key 相关结点的获取</li>
+<li>固定为抽出索引（跳表）结构 的查找， 时间复杂度 O(logN), 空间复杂度 O(3/2N) – 需要构建链表时候，维护链表有序。才可以实现基于二分查找的性能。</li>
+</ol>
+<p>理解了上面的内容，<strong>使用跳表实现堆</strong>就不难了。</p>
+<ul>
+<li>入堆操作，只需要根据索引插到链表中，并更新索引（可选）。</li>
+<li>出堆操作，只需要删除头部（或者尾部），并更新索引（可选）。<br>大家如果想检测自己的实现是否有问题，可以去力扣的<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/design-skiplist/">1206. 设计跳表</a> 检测。</li>
+</ul>
+<h3 id="基于数组实现二叉堆-–-完全二叉树"><a href="#基于数组实现二叉堆-–-完全二叉树" class="headerlink" title="基于数组实现二叉堆 – 完全二叉树"></a>基于数组实现二叉堆 – 完全二叉树</h3><p>二叉堆的实现，我们仅讲解<strong>最核心的两个操作： heappop（出堆） 和 heappush（入堆）。</strong>对于其他操作不再讲解，不过我相信你会了这两个核心操作，其他的应该不是难事。</p>
+<p>实现之后的使用效果大概是这样的：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">h = min_heap()<br>h.build_heap([<span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>])<br><br>h.heappush(<span class="hljs-number">1</span>)<br>h.heappop() <span class="hljs-comment"># 1</span><br>h.heappop() <span class="hljs-comment"># 2</span><br>h.heappush(<span class="hljs-number">1</span>)<br>h.heappop() <span class="hljs-comment"># 1</span><br>h.heappop() <span class="hljs-comment"># 3</span><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="出-入堆操作思路"><a href="#出-入堆操作思路" class="headerlink" title="出/入堆操作思路"></a>出/入堆操作思路</h4><ol>
+<li>出堆：根节点要出堆，最大的尾结点放到根节点位置，然后不断下沉。</li>
+<li>入堆：在尾巴结点添加新元素，然后将新元素不断上浮（只需要和其父节点比较即可）。</li>
+</ol>
+<p>核心伪代码（上浮和下沉）：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// x 是要上浮的元素索引，从根的底部开始上浮</span><br><span class="hljs-function"><span class="hljs-keyword">private</span> voide <span class="hljs-title">shift_up</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span></span>&#123;<br>    <span class="hljs-keyword">while</span> (x &gt; <span class="hljs-number">1</span> &amp;&amp; h[x] &gt; h[x/<span class="hljs-number">2</span>]) &#123;<br>        <span class="hljs-comment">// swap 交换数组两个位置的值</span><br>        swap(h[x], h[x/<span class="hljs-number">2</span>]);<br>        x /= <span class="hljs-number">2</span>;<br>    &#125;<br>&#125;<br><br><br><span class="hljs-comment">// x 是要下沉的元素索引，从树的顶部开始下沉</span><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">shift_down</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span> </span>&#123;<br>    <span class="hljs-keyword">while</span>( x * <span class="hljs-number">2</span> &lt;= n) &#123;<br>        <span class="hljs-comment">// minChild 获取更小的直接点的索引并且返回</span><br>        mc = minChild(x);<br>        <span class="hljs-keyword">if</span> (h[mc] &lt;= h[x]) <span class="hljs-keyword">break</span>;<br>        swap(h[x], h[mc]);<br>        x = mc;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="java代码实现“使用完全二叉树构建堆”"><a href="#java代码实现“使用完全二叉树构建堆”" class="headerlink" title="java代码实现“使用完全二叉树构建堆”"></a>java代码实现“使用完全二叉树构建堆”</h4><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 用完全二叉树来构建 堆</span><br><span class="hljs-comment"> * 前置条件 起点为 1</span><br><span class="hljs-comment"> * 那么 子节点为  i &lt;&lt;1 和 i&lt;&lt;1 + 1</span><br><span class="hljs-comment"> * 核心方法为</span><br><span class="hljs-comment"> * shiftdown 交换下沉</span><br><span class="hljs-comment"> * shiftup 交换上浮</span><br><span class="hljs-comment"> * &lt;p&gt;</span><br><span class="hljs-comment"> * build 构建堆</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">import</span> java.util.Arrays;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Heap</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> size = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">int</span> queue[];<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Heap</span><span class="hljs-params">(<span class="hljs-keyword">int</span> initialCapactity)</span> <span class="hljs-keyword">throws</span> IllegalAccessException </span>&#123;<br>        <span class="hljs-keyword">if</span> (initialCapactity &lt; <span class="hljs-number">1</span>) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalAccessException();<br>        &#125;<br>        <span class="hljs-keyword">this</span>.queue = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[initialCapactity];<br>    &#125;<br><br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Heap</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] arr)</span> </span>&#123;<br>        size = arr.length;<br>        queue = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[arr.length + <span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> val : arr) &#123;<br>            queue[i++] = val;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">shiftDown</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> temp = queue[i];<br><br>        <span class="hljs-keyword">while</span> ((i&lt;&lt;<span class="hljs-number">1</span>) &lt;= size)&#123;<br>            <span class="hljs-comment">// 找两个子树中小的那个</span><br>            <span class="hljs-keyword">int</span> child = i &lt;&lt; <span class="hljs-number">1</span>; <span class="hljs-comment">// 左孩子</span><br>            <span class="hljs-keyword">if</span> (child != size &amp;&amp; queue[child + <span class="hljs-number">1</span>] &lt; queue[child]) &#123;<br>                child++;<br>            &#125;<br><br>            <span class="hljs-keyword">if</span> (temp &gt; queue[child])&#123;<br>                queue[i] = queue[child];<br>                i = child;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br><br>        queue[i] = temp;<br>    &#125;<br><br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">shiftUp</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> temp = queue[i];<br>        <span class="hljs-keyword">while</span> ((i&gt;&gt;<span class="hljs-number">1</span>) &gt; <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">if</span> (temp &lt; queue[i&gt;&gt;<span class="hljs-number">1</span>]) &#123;<br>                queue[i] = queue[i&gt;&gt;<span class="hljs-number">1</span>];<br>                i &gt;&gt;= <span class="hljs-number">1</span>;<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br>        queue[i] = temp;<br>    &#125;<br><br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">peek</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-keyword">return</span> queue[<span class="hljs-number">1</span>];<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">pop</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-keyword">int</span> res = queue[<span class="hljs-number">1</span>];<br>        queue[<span class="hljs-number">1</span>] = queue[size--];<br>        shiftDown(<span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">push</span><span class="hljs-params">(<span class="hljs-keyword">int</span> val)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (size == queue.length - <span class="hljs-number">1</span>) &#123;<br>            queue = Arrays.copyOf(queue, size&lt;&lt;<span class="hljs-number">1</span>+<span class="hljs-number">1</span>);<br>        &#125;<br>        queue[++size] = val;<br>        shiftUp(size);<br>    &#125;<br><br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">buildHeap</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = size&gt;&gt;<span class="hljs-number">1</span>; i&gt;<span class="hljs-number">0</span>; i--)&#123;<br>            shiftDown(i);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> arr[] = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[]&#123;<span class="hljs-number">2</span>,<span class="hljs-number">7</span>,<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-number">8</span>,<span class="hljs-number">1</span>&#125;;<br>        Heap heap = <span class="hljs-keyword">new</span> Heap(arr);<br>        heap.buildHeap();<br>        System.out.println(heap.peek());<br>        heap.push(<span class="hljs-number">5</span>);<br>        <span class="hljs-keyword">while</span> (heap.size &gt; <span class="hljs-number">0</span>)&#123;<br>            <span class="hljs-keyword">int</span> num = heap.pop();<br>            System.out.printf(num + <span class="hljs-string">&quot;,&quot;</span>);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+<h2 id="堆的使用技巧"><a href="#堆的使用技巧" class="headerlink" title="堆的使用技巧"></a>堆的使用技巧</h2><h3 id="技巧一：固定堆"><a href="#技巧一：固定堆" class="headerlink" title="技巧一：固定堆"></a>技巧一：固定堆</h3><p>固定堆的大小 k 不变，代码上可通过每 pop 出去一个就 push 进来一个来实现。而由于初始堆可能是 0，我们刚开始需要一个一个 push 进堆以达到堆的大小为 k，因此严格来说应该是<code>维持堆的大小不大于 k</code>。<br>要点：固定一个大小为 k 的大顶堆可以快速求第 k 小的数，反之固定一个大小为 k 的小顶堆可以快速求第 k 大的数。</p>
+<h4 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h4><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-median-from-data-stream/">295. 数据流的中位数</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-cost-to-hire-k-workers/">857. 雇佣 K 名工人的最低成本</a></p>
+<h4 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h4><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-kth-largest-xor-coordinate-value/">5663. 找出第 K 大的异或坐标值</a></p>
+<h3 id="技巧二：多路归并"><a href="#技巧二：多路归并" class="headerlink" title="技巧二：多路归并"></a>技巧二：多路归并</h3><ul>
+<li>多路体现在：有多条候选路线。代码上，我们可使用多指针来表示。</li>
+<li>归并体现在：结果可能是多个候选路线中最长的或者最短，也可能是第 k 个 等。因此我们需要对多条路线的结果进行比较，并根据题目描述舍弃或者选取某一个或多个路线。</li>
+</ul>
+<h4 id="例题："><a href="#例题：" class="headerlink" title="例题："></a>例题：</h4><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-the-kth-smallest-sum-of-a-matrix-with-sorted-rows/">1439. 有序矩阵中的第 k 个最小数组和</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-k-th-smallest-pair-distance/">719. 找出第 k 小的距离对</a>  – 使用小顶堆实现有问题，存在一条案例过不去。只能用二分查找实现。但是二分查找的没看懂 — <strong>待理解。</strong><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/smallest-range-covering-elements-from-k-lists/">632.最小区间</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimize-deviation-in-array/description/">1675. 数组的最小偏移量</a></p>
+<h3 id="技巧三-事后小诸葛"><a href="#技巧三-事后小诸葛" class="headerlink" title="技巧三 - 事后小诸葛"></a>技巧三 - 事后小诸葛</h3><p>这个技巧指的是：当从左到右遍历的时候，我们是不知道右边是什么的，需要等到你到了右边之后才知道。</p>
+<p>想要知道右边是什么有两种方式：<br>第一种是遍历两次，第一次遍历将数记录下来，第二次遍历的时候，使用上次遍历记录的数据。<br>第二种是使用一次遍历，边遍历边存储，当遍历到指定元素后，往前回溯。具体来说就是将从左往右的数据全部收集起来，等到需要用的时候，在其中挑一个使用。</p>
+<h4 id="例题：-1"><a href="#例题：-1" class="headerlink" title="例题："></a>例题：</h4><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-number-of-refueling-stops/">871. 最低加油次数</a><br><a href="">1488. 避免洪水泛滥</a><br><a href="">1642. 可以到达的最远建筑</a></p>
+<h2 id="堆的四种应用"><a href="#堆的四种应用" class="headerlink" title="堆的四种应用"></a>堆的四种应用</h2><h3 id="1-topK"><a href="#1-topK" class="headerlink" title="1. topK"></a>1. topK</h3><div class="hljs code-wrapper"><pre><code>题目要求包含“动态求极值”使用固定堆（最大值or最小值）
+eg: 求第k个最小数。
+方法一：创建最小堆，将所有数入堆，然后出堆 k 次，即求得第k个最小数。
+方法二：创建固定大小为k的最大堆，将数字依次入堆。当最大堆的大小到达k之后的数字再入堆时，只需要和堆顶数字比较，如果大于堆顶数字可以直接跳过，小于堆顶数字则需要将堆顶出堆，将该数字入堆，调整堆的结构。
+</code></pre></div>
+<p>相关题目：<br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/smallest-k-lcci/">面试题 17.14. 最小 K 个数</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/top-k-frequent-elements/">347. 前 K 个高频元素</a><br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/k-closest-points-to-origin/">973. 最接近原点的 K 个点</a></p>
+<h3 id="2-最短带权路径"><a href="#2-最短带权路径" class="headerlink" title="2. 最短带权路径"></a>2. 最短带权路径</h3><p>带权图的最短路径问题，如果用队列做 BFS 那就需要优先队列才可以，因为路径之间是有权重的差异的。</p>
+<p>使用<strong>优先队列的 BFS</strong> 实现典型的就是<strong>dijkstra 算法</strong>。</p>
+<h4 id="Dijkstra-算法"><a href="#Dijkstra-算法" class="headerlink" title="Dijkstra 算法"></a>Dijkstra 算法</h4><p>主要是解决：图中任意两点的最短路径。<br>基本思想是“贪心”：每次都遍历所有邻居，并从中找到距离最小的，本质上是一种<strong>广度优先遍历</strong>。<br>实现方式：借助‘堆’的数据结构，使得可以再 <code>logN</code> 的时间内找到 cost 最小的点，其中 N 为堆的大小。</p>
+<p>代码模板：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">dijkstra</span>(<span class="hljs-params">graph, start, end</span>):</span><br>    heap = [(<span class="hljs-number">0</span>, start)]<br>    visited = <span class="hljs-built_in">set</span>()<br>    <span class="hljs-keyword">while</span> heap:<br>        (cost, u) = heapq.heappop(heap)<br>        <span class="hljs-keyword">if</span> u <span class="hljs-keyword">in</span> visited:<br>            <span class="hljs-keyword">continue</span><br>        visited.add(u)<br>        <span class="hljs-keyword">if</span> u == end:<br>            <span class="hljs-keyword">return</span> cost<br>        <span class="hljs-keyword">for</span> v, c <span class="hljs-keyword">in</span> graph[u]:<br>            <span class="hljs-keyword">if</span> v <span class="hljs-keyword">in</span> visited:<br>                <span class="hljs-keyword">continue</span><br>            <span class="hljs-built_in">next</span> = cost + c<br>            heapq.heappush(heap, (<span class="hljs-built_in">next</span>, v))<br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure>
+
+<p>上述模板应用：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/network-delay-time/">743. 网络延迟时间</a><br>类似题目 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/cheapest-flights-within-k-stops/">787. K 站中转内最便宜的航班</a></p>
+<h3 id="3-因子分解"><a href="#3-因子分解" class="headerlink" title="3. 因子分解"></a>3. 因子分解</h3><h3 id="4-堆排序"><a href="#4-堆排序" class="headerlink" title="4. 堆排序"></a>4. 堆排序</h3>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/lc-0000-xxxx">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">lc-0000.xxxx</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/lc-1675-%E6%95%B0%E7%BB%84%E7%9A%84%E6%9C%80%E5%B0%8F%E5%81%8F%E7%A7%BB%E9%87%8F">
+                        <span class="hidden-mobile">lc-1675.数组的最小偏移量</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="/js/diy/caidai.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

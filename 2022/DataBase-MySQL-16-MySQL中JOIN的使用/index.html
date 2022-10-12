@@ -1,0 +1,604 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fishes.png">
+  <link rel="icon" href="/img/fishes.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Fuku Lee">
+  <meta name="keywords" content="">
+  
+  <title>Fuku</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/diy/shubiao.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>F's Log</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20210427005926.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-10-12 11:28" pubdate>
+        2022年10月12日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      23
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            <div class="markdown-body">
+              <ul>
+<li></li>
+<li><p>环境</p>
+<ul>
+<li>建立两个表 t1 (100row)和 t2(1000row) ，每个表上都有一个主键索引 id 和一个索引 a，字段b上无索引。</li>
+<li>存储过程 <code>idata()</code></li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> `t2` (<br>    `id` <span class="hljs-type">int</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>    `a` <span class="hljs-type">int</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span>,<br>    `b` <span class="hljs-type">int</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span>,<br>    <span class="hljs-keyword">PRIMARY</span> KEY (`id`),<br>    KEY `a` (`a`)<br>) ENGINE<span class="hljs-operator">=</span>InnoDB;<br><span class="hljs-keyword">drop</span> <span class="hljs-keyword">procedure</span> idata;<br>delimiter ;;<br><span class="hljs-keyword">create</span> <span class="hljs-keyword">procedure</span> idata()<br><span class="hljs-keyword">begin</span><br><span class="hljs-keyword">declare</span> i <span class="hljs-type">int</span>;<br><span class="hljs-keyword">set</span> i<span class="hljs-operator">=</span><span class="hljs-number">1</span>;<br>while (i<span class="hljs-operator">&lt;=</span><span class="hljs-number">1000</span>) do<br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> t2 <span class="hljs-keyword">values</span>(i, i, i);<br><span class="hljs-keyword">set</span> i<span class="hljs-operator">=</span>i<span class="hljs-operator">+</span><span class="hljs-number">1</span>;<br><span class="hljs-keyword">end</span> while;<br><span class="hljs-keyword">end</span>;;<br>delimiter ;<br><span class="hljs-keyword">call</span> idata();<br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> t1 <span class="hljs-keyword">like</span> t2;<br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> t1 (<span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> t2 <span class="hljs-keyword">where</span> id<span class="hljs-operator">&lt;=</span><span class="hljs-number">100</span>);<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p> 使用 join 需要关注是哪张表作为驱动表，哪张表是被驱动表。</p>
+<p>规则：<strong>小表驱动大表</strong>。直接使用 join 语句，MySQL 优化器可能会选择 t1 或 t2 作为驱动表。</p>
+</blockquote>
+</li>
+<li><p>Index Nested-Loop Join (索引嵌套循环连接) – </p>
+<ul>
+<li>被驱动表上有可用索引的情况，使用 <code>Index Nested-Loop Join</code> 算法。</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> t1 straight_join t2 <span class="hljs-keyword">on</span> (t1.a <span class="hljs-operator">=</span> t2.b);<br><span class="hljs-comment">-- 使用 straight_join， t1 为驱动表，t2 为被驱动表。</span><br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li><p>执行流程：</p>
+<ol>
+<li>从 t1 中读入一行数据 R；</li>
+<li>从数据行R中，取出a字段到表t2里去查找；</li>
+<li>取出表t2中满足条件的行，跟R组成一行，作为结果集的一部分；</li>
+<li> 重复执行步骤1到3，直到表t1的末尾循环结束。</li>
+</ol>
+<blockquote>
+<p>对表 t1 做全表扫描，对表 t2 走索引树搜索过程，每次扫描一行。扫描 100 次。</p>
+</blockquote>
+</li>
+<li><p>假设驱动表行数为N，被驱动表行数为M，则执行过程的复杂度为<br>$$<br>N+N<em>2</em>log_2M<br>$$</p>
+</li>
+<li><p>结论：（前提：可以使用被驱动表的索引的情况下）</p>
+<ol>
+<li>显然驱动表行数N的影响更大，因此应尽量让小表来做驱动表。</li>
+<li>使用 join 语句，性能比强行拆成多个单表执行 SQL 性能好。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>Simple Nested-Loop Join 和 <strong>Block Nested-Loop Join</strong> </p>
+<ul>
+<li>被驱动表上没有可用索引时，使用 <code>Block Nested-Loop Join</code> 算法，MySQL 不选择 <code>Simple Nested-Loop Join</code>。</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> t1 straight_join t2 <span class="hljs-keyword">on</span> (t1.a <span class="hljs-operator">=</span> t2.b);<br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>使用 <code>Block Nested-Loop Join</code> 算法流程：<ol>
+<li>把表t1的数据读入线程内存<code>join_buffer</code>中，由于我们这个语句中写的是<code>select *</code>，因此是<strong>把整个表t1放入了内存</strong>。<em>如果扫描的 t1 表数据量 &gt; join_buffer，则采用分段扫描</em>；</li>
+<li>扫描表t2，把表t2中的每一行取出来，跟<code>join_buffer</code>中的<strong>每行数据</strong>做对比，满足join条件的，作为结果集的一部分返回。</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>对表t1做全表扫描（100行），对表 t2 也是全表扫描（1000次），总共扫描行数为 1100 行。</p>
+<p>扫描表 t2 时，需要在内存中做 100*1000=10万次判断，（每读行都需要判断100次）</p>
+</blockquote>
+<ul>
+<li>假设驱动表行数为 N，被驱动表行数为 M。则 Block 算法的执行过程中<ol>
+<li>两个表都做一次全表扫描，总扫描行数为 M+N，如果 N 表查询的数据量过大，那么 M 表需要进行<strong>多次全表扫描</strong>。</li>
+<li>内存中的判断次数为 M*N （如果时 Simple 算法，该步骤的比较不是在内存，因此MySQL 优化器会选择 Block 算法。）</li>
+</ol>
+</li>
+<li>BNL 算法的缺点<ol>
+<li>可能回多次扫描被驱动表，占用磁盘 IO 资源</li>
+<li>判断 join 条件时需要执行 M*N 次对比（M、N分别是两张表的行数），如果是大表就会占用非常多的CPU资源</li>
+<li>可能会导致 Buffer Pool 的热数据被淘汰，影响内存命中率</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>join 语句优化</p>
+<ul>
+<li>环境：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-comment">-- 表 t1 中有 1000 行数据，每行 a = 1001 - id。即字段 a 逆序</span><br><span class="hljs-comment">-- 表 t2 有 100 万行数据</span><br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> t1(id <span class="hljs-type">int</span> <span class="hljs-keyword">primary</span> key, a <span class="hljs-type">int</span>, b <span class="hljs-type">int</span>, index(a));<br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> t2 <span class="hljs-keyword">like</span> t1;<br><span class="hljs-keyword">drop</span> <span class="hljs-keyword">procedure</span> idata;<br>delimiter ;;<br><span class="hljs-keyword">create</span> <span class="hljs-keyword">procedure</span> idata()<br><span class="hljs-keyword">begin</span><br><span class="hljs-keyword">declare</span> i <span class="hljs-type">int</span>;<br><span class="hljs-keyword">set</span> i<span class="hljs-operator">=</span><span class="hljs-number">1</span>;<br>while(i<span class="hljs-operator">&lt;=</span><span class="hljs-number">1000</span>)do<br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> t1 <span class="hljs-keyword">values</span>(i, <span class="hljs-number">1001</span><span class="hljs-operator">-</span>i, i);<br><span class="hljs-keyword">set</span> i<span class="hljs-operator">=</span>i<span class="hljs-operator">+</span><span class="hljs-number">1</span>;<br><span class="hljs-keyword">end</span> while;<br><span class="hljs-keyword">set</span> i<span class="hljs-operator">=</span><span class="hljs-number">1</span>;<br>while(i<span class="hljs-operator">&lt;=</span><span class="hljs-number">1000000</span>)do<br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> t2 <span class="hljs-keyword">values</span>(i, i, i);<br><span class="hljs-keyword">set</span> i<span class="hljs-operator">=</span>i<span class="hljs-operator">+</span><span class="hljs-number">1</span>;<br><span class="hljs-keyword">end</span> while;<br><span class="hljs-keyword">end</span>;;<br>delimiter ;<br><span class="hljs-keyword">call</span> idata();<br></code></pre></div></td></tr></table></figure></li>
+<li><p>Multi-Range Read 优化 —— MRR 优化</p>
+<ul>
+<li>Multi-Range Read 优化的主要目的是：尽量使用顺序读盘。</li>
+<li>利用二级索引查找范围数据之后，进行的回表查询是“按行查”的机制。MRR优化思路建立在：如果能够按照主键的递增顺序回表的话，对磁盘的读比较接近顺序读，能够提升读性能。因此，<strong>MRR 引入 read_rnd_buffer</strong>。进行二级索引查找时，将满足条件的记录的 id 放入 read_rnd_buffer 中，对 read_rnd_buffer 中的id进行排序，再进行回表操作。</li>
+<li>开启稳定使用 MRR 优化设置</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">set</span> optimizer_switch<span class="hljs-operator">=</span>&quot;mrr_cost_based=off&quot; <span class="hljs-comment">-- 由于优化器判断消耗，更倾向于不使用MRR。想要测试效果需要开将 mrr_cost_based 设置为 off</span><br><br><span class="hljs-comment">-- read_rnd_buffer 的大小由 read_rnd_buffer_size 参数控制</span><br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li><code>select* from t1 where a&gt;=1 and a&lt;=100;</code> 使用MRR前后流程对比：</li>
+</ul>
+<img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20220314150153.png" srcset="/img/loading.gif" lazyload alt="使用MRR前的回表操作" style="zoom:80%;" />
+
+<blockquote>
+<p>使用 MRR 优化后的执行流程和 explain 结果</p>
+</blockquote>
+<img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20220314150414.png" srcset="/img/loading.gif" lazyload alt="MRR优化后执行流程" style="zoom:80%;" />
+
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20220314150647.png" srcset="/img/loading.gif" lazyload alt="image-20220314150645984"></p>
+</li>
+<li><p>BAK 算法 （Batched Key Access)</p>
+<ul>
+<li>BAK 算法其实是对 <code>NLJ</code> 算法的优化。再 <code>NLJ</code> 算法的基础上，使用 join_buffer 临时内存（结合 BNL 的优点）</li>
+</ul>
+<blockquote>
+<p><code>NLJ</code> 算法流程</p>
+</blockquote>
+<img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20220314164808.png" srcset="/img/loading.gif" lazyload alt="image-20220314164807148" style="zoom:80%;" />
+
+<blockquote>
+<p>BKA 算法流程</p>
+</blockquote>
+<img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20220314164910.png" srcset="/img/loading.gif" lazyload alt="image-20220314164908901" style="zoom:80%;" /></li>
+<li><p>BNL 转 BKA</p>
+<ul>
+<li>执行语句之前，需要通过理论分析和查看explain结果的方式，确认是否要使用BNL算法。如果确认优化器会使用BNL算法，就需要做优化。</li>
+<li>优化的常见做法是，<ol>
+<li><strong>给被驱动表的join字段加上索引</strong>，把BNL算法转成BKA算法。</li>
+<li>当不适合在被驱动表上加索引时（该字段区分度不大 or 该语句很少用 or 满足条件的数据量其实很少，但该表数据又多建立索引很没必要 ），可以考虑使用<strong>加索引的临时表</strong>。</li>
+</ol>
+</li>
+<li>使用<strong>加索引的临时表</strong>大致思路如下：<ol>
+<li>把表t2中满足条件的数据放在临时表tmp_t中；</li>
+<li>为了让join使用BKA算法，给临时表tmp_t的字段b加上索引；</li>
+<li> 让表t1和tmp_t做join操作。</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>案例：不适合直接在被驱动表上加索引的情况</p>
+</blockquote>
+<ul>
+<li>未优化前</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> t1 <span class="hljs-keyword">join</span> t2 <span class="hljs-keyword">on</span> (t1.b<span class="hljs-operator">=</span>t2.b) <span class="hljs-keyword">where</span> t2.b<span class="hljs-operator">&gt;=</span><span class="hljs-number">1</span> <span class="hljs-keyword">and</span> t2.b<span class="hljs-operator">&lt;=</span><span class="hljs-number">2000</span>;<br><span class="hljs-comment">-- 该SQL存在的问题是，在扫描表 t2 时候，需要进行join判断。整个流程的判断次数是　1000*100万=10亿次</span><br></code></pre></div></td></tr></table></figure>
+
+<p>explain 分析结果：使用了 BNL 算法</p>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20220314170908.png" srcset="/img/loading.gif" lazyload alt="explain结果"></p>
+<p>语句执行时间接近 <strong>1分11秒</strong></p>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20220314171133.png" srcset="/img/loading.gif" lazyload alt="语句执行时间"></p>
+<ul>
+<li>使用临时表优化BNL算法为BKA算法</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> temporary <span class="hljs-keyword">table</span> temp_t(id <span class="hljs-type">int</span> <span class="hljs-keyword">primary</span> key, a <span class="hljs-type">int</span>, b <span class="hljs-type">int</span>,index(b))engine<span class="hljs-operator">=</span>innodb;<br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> temp_t <span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> t2 <span class="hljs-keyword">where</span> b<span class="hljs-operator">&gt;=</span><span class="hljs-number">1</span> <span class="hljs-keyword">and</span> b<span class="hljs-operator">&lt;=</span><span class="hljs-number">2000</span>;<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> t1 <span class="hljs-keyword">join</span> temp_t <span class="hljs-keyword">on</span> (t1.b<span class="hljs-operator">=</span>temp_t.b);<br></code></pre></div></td></tr></table></figure>
+
+<p>explain 分析结果：使用了临时表 temp_t 上的索引，说明使用了 NLJ 算法</p>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20220314171522.png" srcset="/img/loading.gif" lazyload alt="image-20220314171521197"></p>
+<p>语句执行时间为 0.01 秒</p>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20220314171605.png" srcset="/img/loading.gif" lazyload alt="image-20220314171604889"></p>
+</li>
+<li><p>扩展 – hash join</p>
+<ul>
+<li> MySQL目前的版本还不支持 hash join，但你可以配合应用端自己模拟出来</li>
+<li>在业务端实现 hash join 逻辑，实现流程大致如下：<ol>
+<li><code>select * from t1;</code>取得表t1的全部1000行数据，在业务端存入一个<strong>hash结构</strong>，比如C++里的<br>set、PHP的dict这样的数据结构。</li>
+<li><code>select * from t2 where b&gt;=1 and b&lt;=2000;</code> 获取表t2中满足条件的2000行数据。</li>
+<li>把这2000行数据，一行一行地取到业务端，到hash结构的数据表中寻找匹配的数据。满足匹配的条件的这行数据，就作为结果集的一行。</li>
+</ol>
+</li>
+<li>理论上，这个过程会比临时表方案的执行速度还要快一些。如果你感兴趣的话，可以自己验证一下。</li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/DataBase-MySQL-17-MyySQL%E7%9A%84%E4%B8%B4%E6%97%B6%E8%A1%A8/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/DataBase-MySQL-15-MySQL-%E5%85%A8%E8%A1%A8%E6%89%AB%E6%8F%8F/">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="/js/diy/caidai.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

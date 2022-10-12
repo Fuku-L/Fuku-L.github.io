@@ -1,0 +1,584 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fishes.png">
+  <link rel="icon" href="/img/fishes.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Fuku Lee">
+  <meta name="keywords" content="">
+  
+  <title>Fuku</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/diy/shubiao.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>F's Log</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20210427005926.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-10-12 11:28" pubdate>
+        2022年10月12日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      19
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            <div class="markdown-body">
+              <h3 id="MySQL-临时表有两种："><a href="#MySQL-临时表有两种：" class="headerlink" title="MySQL 临时表有两种："></a>MySQL 临时表有两种：</h3><ul>
+<li>用户临时表：通过 <code>create temporary table t1_tmp like t1;</code>就是用户临时表。</li>
+<li>内部临时表：用来存放语句执行过程中的中间数据。</li>
+</ul>
+<h2 id="用户临时表"><a href="#用户临时表" class="headerlink" title="用户临时表"></a>用户临时表</h2><h3 id="MySQL-用户临时表的特性"><a href="#MySQL-用户临时表的特性" class="headerlink" title="MySQL 用户临时表的特性"></a>MySQL 用户临时表的特性</h3><ul>
+<li>仅创建临时表的线程可见，其他 session 不可见</li>
+<li>创建临时表和删除临时表的语句会被记录到binlog日志中</li>
+<li>存放在 MySQL 的临时文件空间，前缀为<code>#sql&#123;进程id&#125;_&#123;线程id&#125;_序列号</code>，可以使用 <code>select @@tmpdir</code> 显示实例的临时文件目录。使用临时表创建语句的时候分为两个部分：① 表结构定义：为 InnoDB 表创建一个 .frm 文件。② 数据文件：在临时文件目录中创建一个相同前缀、以 .idb 结尾的文件 （5.7 之后引入临时表空间后不在创建 .idb 文件）</li>
+</ul>
+<h3 id="用户临时表的应用"><a href="#用户临时表的应用" class="headerlink" title="用户临时表的应用"></a>用户临时表的应用</h3><ul>
+<li>join 语句中用来存放过滤后的小表</li>
+<li>分库分表系统的跨库查询</li>
+</ul>
+<blockquote>
+<p>分库分表的场景，将一个逻辑上的大表分散到不同的数据库实例上。</p>
+<p>如：将一个大表 ht ，按字段 f，拆分成1024个分表。分布到 32 个数据库实例上。</p>
+</blockquote>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20220315094232.png" srcset="/img/loading.gif" lazyload alt="image-20220315094223794"></p>
+<ul>
+<li>在 proxy 架构中，分区key的选择以“减少跨库和跨表查询”为依据。假设大部分语句包含 f 的等值条件，则采用字段f 作为分区key。</li>
+<li>但大部分 SQL 查询是范围检索，在分库分表的结构下很可能出现跨表查询的需求：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> v <span class="hljs-keyword">from</span> ht <span class="hljs-keyword">where</span> k <span class="hljs-operator">&gt;=</span> M <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> t_modified <span class="hljs-keyword">desc</span> limit <span class="hljs-number">100</span>;<br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li><p>上述sql没有用到分区键 f。因此只能每次都到所有库中查找满足条件的记录。并且由于需要排序，有两种实现排序的方式：</p>
+<ol>
+<li>在 proxy 层中实现，但是需要开发的工作量比较大，同时对 proxy 端的压力比较大，容易出现内存不足和 CPU 瓶颈的问题。</li>
+<li>将各个分库获取的数据，汇总到一个 MySQL 实例中，在该表上做逻辑操作。执行流程如下：</li>
+</ol>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20220315095630.png" srcset="/img/loading.gif" lazyload alt="image-20220315095629256"></p>
+<ul>
+<li>在汇总库(其中一个分库)上创建一个临时表 temp_ht，表中包含三个字段 v、k、t_modified</li>
+<li>在各分库上执行</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> v,k,t_modified <span class="hljs-keyword">from</span> ht_x <span class="hljs-keyword">where</span> k <span class="hljs-operator">&gt;=</span> M <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> t_modified <span class="hljs-keyword">desc</span> limit <span class="hljs-number">100</span>;<br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>将分库执行的结果插入到 temp_ht 表中</li>
+<li>最后执行</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> v <span class="hljs-keyword">from</span> temp_ht <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> t_modified <span class="hljs-keyword">desc</span> limit <span class="hljs-number">100</span>;<br></code></pre></div></td></tr></table></figure></li>
+</ul>
+<h2 id="内部临时表"><a href="#内部临时表" class="headerlink" title="内部临时表"></a>内部临时表</h2><h3 id="内部临时表的使用"><a href="#内部临时表的使用" class="headerlink" title="内部临时表的使用"></a>内部临时表的使用</h3><h4 id="union-执行流程"><a href="#union-执行流程" class="headerlink" title="union 执行流程"></a>union 执行流程</h4><blockquote>
+<p>环境</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> t1(id <span class="hljs-type">int</span> <span class="hljs-keyword">primary</span> key, a <span class="hljs-type">int</span>, b <span class="hljs-type">int</span>, index(a));<br>delimiter ;;<br><span class="hljs-keyword">create</span> <span class="hljs-keyword">procedure</span> idata()<br><span class="hljs-keyword">begin</span><br><span class="hljs-keyword">declare</span> i <span class="hljs-type">int</span>;<br><span class="hljs-keyword">set</span> i<span class="hljs-operator">=</span><span class="hljs-number">1</span>;<br>while(i<span class="hljs-operator">&lt;=</span><span class="hljs-number">1000</span>)do<br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> t1 <span class="hljs-keyword">values</span>(i, i, i);<br><span class="hljs-keyword">set</span> i<span class="hljs-operator">=</span>i<span class="hljs-operator">+</span><span class="hljs-number">1</span>;<br><span class="hljs-keyword">end</span> while;<br><span class="hljs-keyword">end</span>;;<br>delimiter ;<br><span class="hljs-keyword">call</span> idata();<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>实验</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-comment">-- 取两个子查询结果的并集，union 下重复的只保留一行（去重）</span><br>explain (<span class="hljs-keyword">select</span> <span class="hljs-number">1000</span> <span class="hljs-keyword">as</span> f) <span class="hljs-keyword">union</span> (<span class="hljs-keyword">select</span> id <span class="hljs-keyword">from</span> t1 <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> id <span class="hljs-keyword">desc</span> limit <span class="hljs-number">2</span>);<br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>explain 结果：</li>
+</ul>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20220315110924.png" srcset="/img/loading.gif" lazyload alt="image-20220315110923511"></p>
+<ul>
+<li><p>分析：</p>
+<p><code>unsing temporary</code> 表示用到了临时表，该表只有一个字段f，f为主键。</p>
+<ul>
+<li>由于 union 有去重作用，最后结果集返回两条记录 1000  和 999.</li>
+<li>如果使用 union all，结果集返回三条记录</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>union 和 union all 比较</p>
+</blockquote>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20220315113020.png" srcset="/img/loading.gif" lazyload alt="image-20220315113019361"></p>
+<h4 id="group-by-执行流程"><a href="#group-by-执行流程" class="headerlink" title="group by 执行流程"></a>group by 执行流程</h4><blockquote>
+<p>实验：测试 group by 使用 内存临时表</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-comment">-- 将表 t1 中的数据，按 id%10 进行分组统计出现次数，并按照 m 的结果排序后输出</span><br>explain <span class="hljs-keyword">select</span> id<span class="hljs-operator">%</span><span class="hljs-number">10</span> <span class="hljs-keyword">as</span> m, <span class="hljs-built_in">count</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">as</span> c <span class="hljs-keyword">from</span> t1 <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> m;<br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>explain 结果：</li>
+</ul>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20220315113504.png" srcset="/img/loading.gif" lazyload alt="image-20220315113503441"></p>
+<ul>
+<li>分析：<ul>
+<li>using index：使用了覆盖索引（a）不用回表</li>
+<li>using temporary：使用了了临时表，用来临时存放select取出数据的分组结果（无序）。如果select 取出的数据量比内存临时表空间大（字段太多or行数太多）就转为“磁盘临时表”。</li>
+<li>using filesort：表示需要排序，使用 sort_buffer 进行排序。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>group by 优化方法 – 不需要排序的情况下，使用 order by null 跳过后续的排序阶段</p>
+</blockquote>
+<p>有些情况下，不需要根据 group by 的字段进行排序时，可以在 SQL 中加 order by null 明确告诉优化器不需要排序，直接从临时表取数据返回。</p>
+<ul>
+<li>优化如下</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> id<span class="hljs-operator">%</span><span class="hljs-number">10</span> <span class="hljs-keyword">as</span> m, <span class="hljs-built_in">count</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">as</span> c <span class="hljs-keyword">from</span> t1 <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> m <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> <span class="hljs-keyword">null</span>;<br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>执行结果</li>
+</ul>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20220315153451.png" srcset="/img/loading.gif" lazyload alt="image-20220315153448641"></p>
+<blockquote>
+<p>group by 优化方法 – colument + 索引来避免使用临时表</p>
+</blockquote>
+<p>group by 的作用是：统计不同值的出现个数。直接使用 group by 不管是使用内存临时表还是磁盘临时表，都需要构造一个<strong>带唯一索引的表</strong>，执行代价高，如果统计结果的数据量比较大，执行的group by语句会很慢。</p>
+<ul>
+<li><p>解决方法：通过在表后添加一列存放分组统计结果的字段，并在该字段上创建索引</p>
+</li>
+<li><p>比如上述group by 的优化如下：</p>
+<ol>
+<li>使用 <code>generated column</code> 机制来实现列数据的关联更新，建立列 z=id%10。并在z列上创建索引</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> t1 <span class="hljs-keyword">add</span> <span class="hljs-keyword">column</span> z <span class="hljs-type">int</span> generated always <span class="hljs-keyword">as</span>(id<span class="hljs-operator">%</span><span class="hljs-number">100</span>), <span class="hljs-keyword">add</span> index(z);<br></code></pre></div></td></tr></table></figure>
+
+<ol start="2">
+<li>查询的语句可以改为</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> z,<span class="hljs-built_in">count</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">as</span> c <span class="hljs-keyword">from</span> t1 <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> z;<br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>优化后 explain 结果，可以看到该SQL语句没有用到临时表了</li>
+</ul>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20220315150206.png" srcset="/img/loading.gif" lazyload alt="image-20220315150142198"></p>
+</li>
+</ul>
+<blockquote>
+<p>group by 优化方法 –  直接排序</p>
+</blockquote>
+<p>group by  在不适合额外创建索引的情况下，只能老老实实采用 group by 排序规则。</p>
+<p>但可以<strong>提前预估</strong>一个<code>group by</code> 语句需要放到临时表的数据量。如果预估数据量特别大，可以在 <code>group by</code> 语句中加入 <code>SQL_BIG_RESULT</code> 的提示<strong>告诉优化器直接走磁盘临时表</strong>。可以避免优化器在插入部分数据到内存临时表，发现内存不够了才转成磁盘临时表。同时，MySQL优化器会对该排序算法进行优化，具体不赘述。</p>
+<p>比如上述 group by 的通过此方法优化如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> SQL_BIG_RESULT id<span class="hljs-operator">%</span><span class="hljs-number">100</span> <span class="hljs-keyword">as</span> m, <span class="hljs-built_in">count</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">as</span> c <span class="hljs-keyword">from</span> t1 <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> m;<br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>explain 结果：</li>
+</ul>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20220315151725.png" srcset="/img/loading.gif" lazyload alt="image-20220315151724707"></p>
+<h4 id="group-by-的实现算法小结"><a href="#group-by-的实现算法小结" class="headerlink" title="group by 的实现算法小结"></a>group by 的实现算法小结</h4><ol>
+<li>如果对 group by 没有排序要求，在语句后面加 order by null。避免使用排序</li>
+<li>尽量让 group by 过程用上表索引</li>
+<li>如果 group by 使用到了临时表并且需要排序：如果 group by 统计的数据量不大，尽量只使用内存临时表（通过适当调大 <code>tmp_table_size</code> 参数来避免使用磁盘临时表）。如果 group by 统计的数量太大了，使用 <code>SQL_BIG_RESULT</code> 的提示，来告诉优化器直接使用排序算法得到 group by 的结果</li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/DataBase-MySQL-18-MySQL-Memory%E5%BC%95%E6%93%8E/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/DataBase-MySQL-16-MySQL%E4%B8%ADJOIN%E7%9A%84%E4%BD%BF%E7%94%A8/">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="/js/diy/caidai.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

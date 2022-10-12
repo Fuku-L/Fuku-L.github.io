@@ -1,0 +1,540 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fishes.png">
+  <link rel="icon" href="/img/fishes.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Fuku Lee">
+  <meta name="keywords" content="">
+  
+  <title>02-RDBMS的事务 - Fuku</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/diy/shubiao.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>F's Log</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20210427005926.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="02-RDBMS的事务">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-10-12 11:28" pubdate>
+        2022年10月12日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      19
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">02-RDBMS的事务</h1>
+            
+            <div class="markdown-body">
+              <h2 id="事务的概念"><a href="#事务的概念" class="headerlink" title="事务的概念"></a>事务的概念</h2><p>关系型数据库的事务是指：ACID（原子性、隔离性、一致性、持久性）。<br>在RDBMS中，事务用来保证一组相关操作单元要么全部成功，要么全部失败。<br><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20211029094332.png" srcset="/img/loading.gif" lazyload alt="事务的概念"></p>
+<h2 id="事务的实现"><a href="#事务的实现" class="headerlink" title="事务的实现"></a>事务的实现</h2><p>使用<strong>日志先行</strong>的方式，保证事务的可快速和持久运行。即，<strong>在写数据之前，需要先写日志。</strong></p>
+<p><code>innodb_flush_log_at_trx_commit</code>参数控制事务提交时，将日志缓冲区的事务日志写入磁盘。</p>
+<p><code>innodb_flush_log_at_trx_commit=0</code>:log buffer将每秒一次地写入log file中，并且log file的flush(刷到磁盘)操作同时进行。该模式下在事务提交的时候，不会主动触发写入磁盘的操作。<br><code>innodb_flush_log_at_trx_commit=1</code>:每次事务提交时MySQL都会把log buffer的数据写入log file，并且flush(刷到磁盘)中去，该模式为系统默认。<br><code>innodb_flush_log_at_trx_commit=2</code>:每次事务提交时MySQL都会把log buffer的数据写入log file，但是flush(刷到磁盘)操作并不会同时进行。该模式下，MySQL会每秒执行一次 flush(刷到磁盘)操作。</p>
+<h3 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h3><p>当设置为0，该模式速度最快，但不太安全，mysqld进程的崩溃会导致上一秒钟所有事务数据的丢失。<br>当设置为1，该模式是最安全的， 但也是最慢的一种方式。在mysqld 服务崩溃或者服务器主机crash的情况下，binary log 只有可能丢失最多一个语句或者一个事务。。<br>当设置为2，该模式速度较快，也比0安全，只有在操作系统崩溃或者系统断电的情况下，上一秒钟所有事务数据才可能丢失</p>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20211029100148.png" srcset="/img/loading.gif" lazyload alt="事务的实现"></p>
+<h3 id="redo操作以及手动开启日志"><a href="#redo操作以及手动开启日志" class="headerlink" title="redo操作以及手动开启日志"></a>redo操作以及手动开启日志</h3><p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20211029100524.png" srcset="/img/loading.gif" lazyload alt="redo操作以及手动开启日志"></p>
+<h2 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h2><p>InnoDB有四种隔离级别：Read Uncommitted、Read Committed、Repeatable Read、Serializable。</p>
+<h3 id="读写可能的五种不确定情况"><a href="#读写可能的五种不确定情况" class="headerlink" title="读写可能的五种不确定情况"></a>读写可能的五种不确定情况</h3><ul>
+<li>更新丢失：</li>
+<li>脏读（数据未提交，但是被其他事务读到了。针对未提交数据）：两个事务，事务A修改数据且未提交，事务B中途读到该修改的数据，事务A进行回滚，事务B读到的数据是脏的。</li>
+<li>不可重复读（同一个事务两次读取数据不一致。针对修改操作）：一个事务两次重复读取同一行数据，得到不同的结果。</li>
+<li>幻读（在一个事务的操作中发现了未被操作的数据。针对增删操作）：一个事务两次读取，读取数据集不一致。</li>
+</ul>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20211029101849.png" srcset="/img/loading.gif" lazyload alt="image-20211029101847847"></p>
+<h3 id="四种隔离级别"><a href="#四种隔离级别" class="headerlink" title="四种隔离级别"></a>四种隔离级别</h3><p>READ_UNCOMMITTED<br>读未提交，即能够读取到没有被提交的数据，所以很明显这个级别的隔离机制无法解决脏读、不可重复读、幻读中的任何一种。<br>READ_COMMITTED<br>已提交读，即能够读到那些已经提交的数据，能够防止脏读，但是无法解决不可重复读和幻读的问题。<br>REPEATABLE_READ<br>重复读取，即在数据读出来之后加锁，类似”select * from XXX for update”，明确数据读取出来就是为了更新用的，所以要加一把锁，防止别人修改它。REPEATABLE_READ的意思也类似，读取了一条数据，这个事务不结束，别的事务就不可以改这条记录，这样就解决了脏读、不可重复读的问题，但是幻读的问题还是无法解决。<br>Read、Serializable<br>串行化/序列化。最高的事务隔离级别，不管多少事务，挨个运行完一个事务的所有子事务之后才可以执行另外一个事务里面的所有子事务，这样就解决了脏读、不可重复读和幻读的问题了。</p>
+<p><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20211029104821.png" srcset="/img/loading.gif" lazyload alt="事务的隔离级别"></p>
+<table>
+<thead>
+<tr>
+<th>事务隔离级别</th>
+<th>脏读</th>
+<th>不可重复读</th>
+<th>幻读</th>
+<th>加锁</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>读未提交</td>
+<td>有</td>
+<td>有</td>
+<td>有</td>
+<td>写锁</td>
+</tr>
+<tr>
+<td>读已提交</td>
+<td>无</td>
+<td>有</td>
+<td>有</td>
+<td>读锁+写锁</td>
+</tr>
+<tr>
+<td>重复读</td>
+<td>无</td>
+<td>无</td>
+<td>有</td>
+<td>读锁+写锁</td>
+</tr>
+<tr>
+<td>序列化</td>
+<td>无</td>
+<td>无</td>
+<td>无</td>
+<td>读锁+写锁+GAP锁</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>注意：<br>Repeatable read的读锁会一直到事务结束才释放；<br>Read committed的读锁不等到事务结束，而是读取完成后立即释放。</p>
+</blockquote>
+<p><em>传统数据库解决并发控制的手段还有mvcc等。</em></p>
+<h3 id="乐观锁、悲观锁"><a href="#乐观锁、悲观锁" class="headerlink" title="乐观锁、悲观锁"></a>乐观锁、悲观锁</h3><p>参考链接：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/349445778">https://zhuanlan.zhihu.com/p/349445778</a></p>
+<ul>
+<li>乐观锁：适合读多写少的情况。</li>
+<li>悲观锁：遇到长事务、其他事务需要进行长时间的锁等待。</li>
+</ul>
+<p>– 删除20211029110254图片链接:<a target="_blank" rel="noopener" href="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20211029110254.png">https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20211029110254.png</a></p>
+<p>乐观锁案例：<br><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20211029110504.png" srcset="/img/loading.gif" lazyload alt="乐观锁案例"></p>
+<p>悲观锁案例：<br><img src="https://gitee.com/fuku-lee/blog-pic-store/raw/master/img/20211029110619.png" srcset="/img/loading.gif" lazyload alt="悲观锁案例"></p>
+<h2 id="MySQL中MVCC及其实现"><a href="#MySQL中MVCC及其实现" class="headerlink" title="MySQL中MVCC及其实现"></a>MySQL中MVCC及其实现</h2><p>参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/xuwc/p/13873611.html">https://www.cnblogs.com/xuwc/p/13873611.html</a></p>
+<h3 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h3><h4 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC?"></a>MVCC?</h4><p>MVCC：多版本并发控制(Multi-Version COncurrency Control)。顾名思义，处理并发操作，提高并发能力的技术。<br>一般在DBMS（数据库管理系统）中，实现对数据库的并发访问，在编程语言中实现事务内存。</p>
+<blockquote>
+<p>早期数据库，只有读读之间可以鬓发，读写、写读、写写都要阻塞。<br>引入多版本（MVCC）之后，只有写写之间相互阻塞，其他三种操作可并行。可以大幅度提高InnoDB的并发度。</p>
+</blockquote>
+<p>在内部实现中，与<code>Postgres</code>在数据行上实现多版本不同，<code>InnoDB</code>是在undolog中实现的，通过undolog可以找回数据的历史版本。找回的数据历史版本可以提供给用户读(按照隔离级别的定义，有些读请求只能看到比较老的数据版本)，也可以在回滚的时候覆盖数据页上的数据。在InnoDB内部中，会记录一个全局的活跃读写事务数组，其主要用来判断事务的可见性。</p>
+<p>MVCC在MySQL InnoDB中的实现主要是为了提高数据库并发性能，用更好的方式去处理读-写冲突，做到即使有读写冲突时，也能做到不加锁，非阻塞并发读</p>
+<h4 id="当前读和快照读"><a href="#当前读和快照读" class="headerlink" title="当前读和快照读?"></a>当前读和快照读?</h4><p>MySQL InnoDB 下的当前读和快照读?</p>
+<ul>
+<li>当前读<br>  是指读取记录的最新版本，并对当前的读取的记录进行<strong>加锁</strong>，使得版本其他并发事务不能修改当前事务。<br>  类似于 <code>select lock in share mode</code>(共享锁)，<code>select for update/insert/delete</code>（排他锁）这些操作都是一种当前读。</li>
+<li>快照读<br>  是指不加锁的非阻塞读，实现方式是基于MVCC，所以读到的不一定是数据的最新版本，可能是之前的历史版本。<br>  快照读的前提是<strong>隔离级别不是串行级别</strong>，串行级别下的快照读<strong>会退化成当前读</strong>；之所以出现快照读的情况，是基于提高并发性能的考虑。<br>  可以认为MVCC是行锁的一种变种。在很多情况下避免加锁操作，降低开销。</li>
+</ul>
+<p>比较</p>
+<ul>
+<li>MVCC是一个理想概念，“维持一个数据的多个版本，使得读写操作不那么冲突。”</li>
+<li>在MySQL实现MVCC的方式是：快照读，而当前读就是悲观锁的具体实现。</li>
+<li>说的再细致一些，快照读本身也是一个抽象概念，再深入研究。MVCC模型在MySQL中的具体实现则是由 <strong>3个隐式字段</strong>，undo日志 ，Read View 等去完成的。</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+                    
+                      <a class="hover-with-bg" href="/tags/SQL%E6%95%B0%E6%8D%AE%E5%BA%93/">SQL数据库</a>
+                    
+                      <a class="hover-with-bg" href="/tags/MySQL%E7%AE%A1%E7%90%86%E4%B9%8B%E9%81%93%EF%BC%8C%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%EF%BC%8C%E9%AB%98%E5%8F%AF%E7%94%A8%E4%B8%8E%E7%9B%91%E6%8E%A7%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/">MySQL管理之道，性能调优，高可用与监控（第二版）</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/DataBase-TIDB-study-02-TiDB%E7%9A%84%E6%8A%80%E6%9C%AF%E5%86%85%E5%B9%95/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">02-RDBMS的事务</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/01-TIDB%E5%AE%89%E8%A3%85">
+                        <span class="hidden-mobile">01.TIDB安装</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="/js/diy/caidai.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
